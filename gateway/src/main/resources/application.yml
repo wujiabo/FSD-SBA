@@ -12,6 +12,9 @@ server:
 
 zuul:
   routes:
-    api:
-      path: /**
+    api-payment:
+      path: /api-payment/**
       serviceId: sba-payment
+    api-search:
+      path: /api-search/**
+      serviceId: sba-search
