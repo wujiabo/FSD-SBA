@@ -18,3 +18,15 @@ zuul:
     api-search:
       path: /api-search/**
       serviceId: sba-search
+    api-security:
+      path: /api-security/**
+      serviceId: sba-security
+    api-technology:
+      path: /api-technology/**
+      serviceId: sba-technology
+    api-training:
+      path: /api-training/**
+      serviceId: sba-training
+    api-user:
+      path: /api-user/**
+      serviceId: sba-user
