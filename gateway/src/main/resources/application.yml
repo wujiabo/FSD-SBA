@@ -1,0 +1,17 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+
+spring:
+  application:
+    name: sba-gateway
+
+server:
+  port: 9002
+
+zuul:
+  routes:
+    api:
+      path: /**
+      serviceId: sba-payment
