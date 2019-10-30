@@ -5,7 +5,7 @@ eureka:
 
 spring:
   application:
-    name: sba-filter
+    name: sba-security
 
 server:
   port: 8003

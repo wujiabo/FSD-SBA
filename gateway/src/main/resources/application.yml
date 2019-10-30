@@ -19,8 +19,8 @@ zuul:
       path: /api-search/**
       serviceId: sba-search
     api-security:
-      path: /api-filter/**
-      serviceId: sba-filter
+      path: /api-security/**
+      serviceId: sba-security
     api-technology:
       path: /api-technology/**
       serviceId: sba-technology
