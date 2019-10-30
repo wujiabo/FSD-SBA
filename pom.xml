@@ -32,6 +32,7 @@
         <module>search</module>
         <module>security</module>
         <module>payment</module>
+        <module>common</module>
     </modules>
 
     <dependencyManagement>

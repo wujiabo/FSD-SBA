@@ -3,17 +3,16 @@ package com.wujiabo.fsd.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.wujiabo.fsd.constants.SBAConstants;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 描述: 过滤器 token
- *
- * @author yanpenglei
- * @create 2017-12-11 14:38
  **/
 public class TokenFilter extends ZuulFilter {
 
@@ -40,17 +39,16 @@ public class TokenFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         LOGGER.info("--->>> TokenFilter {},{}", request.getMethod(), request.getRequestURL().toString());
-
-        String token = request.getParameter("token");// 获取请求的参数
+        String token = request.getHeader(SBAConstants.TOKEN_KEY);
 
         if (StringUtils.isNotBlank(token)) {
             ctx.setSendZuulResponse(true); //对请求进行路由
-            ctx.setResponseStatusCode(200);
+            ctx.setResponseStatusCode(HttpStatus.OK.value());
             ctx.set("isSuccess", true);
             return null;
         } else {
             ctx.setSendZuulResponse(false); //不对其进行路由
-            ctx.setResponseStatusCode(400);
+            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
             ctx.setResponseBody("token is empty");
             ctx.set("isSuccess", false);
             return null;

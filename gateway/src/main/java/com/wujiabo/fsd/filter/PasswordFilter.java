@@ -2,16 +2,16 @@ package com.wujiabo.fsd.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.wujiabo.fsd.constants.SBAConstants;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 描述: 过滤器 Password
- *
- * @author yanpenglei
- * @create 2017-12-11 15:40
  **/
 public class PasswordFilter extends ZuulFilter {
 
@@ -41,16 +41,18 @@ public class PasswordFilter extends ZuulFilter {
 
         LOGGER.info("--->>> PasswordFilter {},{}", request.getMethod(), request.getRequestURL().toString());
 
-        String username = request.getParameter("password");
-        if (null != username && username.equals("123456")) {
+
+        String token = request.getHeader(SBAConstants.TOKEN_KEY);
+
+        if (StringUtils.equals("1",token)) {
             ctx.setSendZuulResponse(true);
-            ctx.setResponseStatusCode(200);
+            ctx.setResponseStatusCode(HttpStatus.OK.value());
             ctx.set("isSuccess", true);
             return null;
         } else {
             ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(400);
-            ctx.setResponseBody("The password cannot be empty");
+            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+            ctx.setResponseBody("verification failed");
             ctx.set("isSuccess", false);
             return null;
         }
