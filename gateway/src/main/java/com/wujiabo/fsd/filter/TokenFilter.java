@@ -4,9 +4,12 @@ package com.wujiabo.fsd.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.wujiabo.fsd.constants.SBAConstants;
+import com.wujiabo.fsd.dto.UserInfoDto;
+import com.wujiabo.fsd.feign.AuthFeign;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 public class TokenFilter extends ZuulFilter {
 
     private final Logger LOGGER = LoggerFactory.getLogger(TokenFilter.class);
+    @Autowired
+    private AuthFeign authFeign;
 
     @Override
     public String filterType() {
@@ -30,6 +35,12 @@ public class TokenFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+        String uri = request.getRequestURL().toString();
+        if(uri.contains("/api/auth/register") || uri.contains("/api/auth/login")){
+            return false;
+        }
         return true; // 是否执行该过滤器，此处为true，说明需要过滤
     }
 
@@ -41,18 +52,23 @@ public class TokenFilter extends ZuulFilter {
         LOGGER.info("--->>> TokenFilter {},{}", request.getMethod(), request.getRequestURL().toString());
         String token = request.getHeader(SBAConstants.TOKEN_KEY);
 
-        if (StringUtils.isNotBlank(token)) {
-            ctx.setSendZuulResponse(true); //对请求进行路由
-            ctx.setResponseStatusCode(HttpStatus.OK.value());
-            ctx.set("isSuccess", true);
-            return null;
-        } else {
+        if (StringUtils.isBlank(token)) {
             ctx.setSendZuulResponse(false); //不对其进行路由
             ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
             ctx.setResponseBody("token is empty");
-            ctx.set("isSuccess", false);
             return null;
         }
+
+        UserInfoDto userInfoDto = authFeign.checkToken(token);
+        if(StringUtils.isBlank(userInfoDto.getUsername())){
+            ctx.setSendZuulResponse(false); //不对其进行路由
+            ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
+            ctx.setResponseBody("checkToken error");
+            return null;
+        }
+        ctx.setSendZuulResponse(true); //对请求进行路由
+        ctx.setResponseStatusCode(HttpStatus.OK.value());
+        return null;
     }
 
 }

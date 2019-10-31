@@ -24,7 +24,7 @@ public class AuthController {
         authService.register(registerUser);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/checkToken")
     public UserInfoDto checkToken(String token) {
         return authService.checkToken(token);
     }

@@ -6,6 +6,10 @@ eureka:
 spring:
   application:
     name: sba-gateway
+  datasource:
+    url: jdbc:mysql://localhost:3306/sba?useSSL=false
+    username: root
+    password: 123456
 
 server:
   port: 9002
