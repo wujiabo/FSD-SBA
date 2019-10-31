@@ -1,5 +1,6 @@
 package com.wujiabo.fsd.utils;
 
+import com.wujiabo.fsd.constants.SBAConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 public class JwtTokenUtils {
 
-    public static final String TOKEN_HEADER = "Authorization";
+    public static final String TOKEN_HEADER = SBAConstants.TOKEN_KEY;
     public static final String TOKEN_PREFIX = "Bearer ";
 
     private static final String SECRET = "FSDSBA";

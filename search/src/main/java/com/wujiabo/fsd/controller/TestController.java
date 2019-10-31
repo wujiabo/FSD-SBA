@@ -16,7 +16,7 @@ public class TestController {
     }
 
     @GetMapping("/testSearch")
-    public String testSearch(@RequestHeader(value="sba_token") String token){
+    public String testSearch(@RequestHeader(value="Authorization") String token){
         System.out.println(token);
         return "testSearch";
     }

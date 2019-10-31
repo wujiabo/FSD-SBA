@@ -1,5 +1,5 @@
 package com.wujiabo.fsd.constants;
 
 public class SBAConstants {
-    public static final String TOKEN_KEY = "sba_token";
+    public static final String TOKEN_KEY = "Authorization";
 }
