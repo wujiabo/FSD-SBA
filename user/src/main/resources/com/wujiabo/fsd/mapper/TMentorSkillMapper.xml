@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wujiabo.fsd.mapper.TUserMapper">
-  <resultMap id="BaseResultMap" type="com.wujiabo.fsd.entity.TUser">
+<mapper namespace="com.wujiabo.fsd.mapper.TMentorSkillMapper">
+  <resultMap id="BaseResultMap" type="com.wujiabo.fsd.entity.TMentorSkill">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
-    <result column="role" jdbcType="VARCHAR" property="role" />
-    <result column="experience" jdbcType="INTEGER" property="experience" />
-    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="skill_id" jdbcType="VARCHAR" property="skillId" />
+    <result column="skill_name" jdbcType="VARCHAR" property="skillName" />
+    <result column="mentor_id" jdbcType="VARCHAR" property="mentorId" />
+    <result column="mentor_name" jdbcType="VARCHAR" property="mentorName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, email, pwd, "role", experience, amount
+    id, skill_id, skill_name, mentor_id, mentor_name
   </sql>
-  <select id="selectByExample" parameterType="com.wujiabo.fsd.entity.TUserCriteria" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.wujiabo.fsd.entity.TMentorSkillCriteria" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user
+    from t_mentor_skill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,96 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_user
+    from t_mentor_skill
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from t_user
+    delete from t_mentor_skill
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.wujiabo.fsd.entity.TUserCriteria">
-    delete from t_user
+  <delete id="deleteByExample" parameterType="com.wujiabo.fsd.entity.TMentorSkillCriteria">
+    delete from t_mentor_skill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wujiabo.fsd.entity.TUser">
-    insert into t_user (id, email, pwd, 
-      "role", experience, amount
-      )
-    values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
-      #{role,jdbcType=VARCHAR}, #{experience,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}
-      )
+  <insert id="insert" parameterType="com.wujiabo.fsd.entity.TMentorSkill">
+    insert into t_mentor_skill (id, skill_id, skill_name, 
+      mentor_id, mentor_name)
+    values (#{id,jdbcType=VARCHAR}, #{skillId,jdbcType=VARCHAR}, #{skillName,jdbcType=VARCHAR}, 
+      #{mentorId,jdbcType=VARCHAR}, #{mentorName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.wujiabo.fsd.entity.TUser">
-    insert into t_user
+  <insert id="insertSelective" parameterType="com.wujiabo.fsd.entity.TMentorSkill">
+    insert into t_mentor_skill
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="email != null">
-        email,
+      <if test="skillId != null">
+        skill_id,
       </if>
-      <if test="pwd != null">
-        pwd,
+      <if test="skillName != null">
+        skill_name,
       </if>
-      <if test="role != null">
-        "role",
+      <if test="mentorId != null">
+        mentor_id,
       </if>
-      <if test="experience != null">
-        experience,
-      </if>
-      <if test="amount != null">
-        amount,
+      <if test="mentorName != null">
+        mentor_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
+      <if test="skillId != null">
+        #{skillId,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null">
-        #{pwd,jdbcType=VARCHAR},
+      <if test="skillName != null">
+        #{skillName,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        #{role,jdbcType=VARCHAR},
+      <if test="mentorId != null">
+        #{mentorId,jdbcType=VARCHAR},
       </if>
-      <if test="experience != null">
-        #{experience,jdbcType=INTEGER},
-      </if>
-      <if test="amount != null">
-        #{amount,jdbcType=DECIMAL},
+      <if test="mentorName != null">
+        #{mentorName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wujiabo.fsd.entity.TUserCriteria" resultType="java.lang.Long">
-    select count(*) from t_user
+  <select id="countByExample" parameterType="com.wujiabo.fsd.entity.TMentorSkillCriteria" resultType="java.lang.Long">
+    select count(*) from t_mentor_skill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update t_user
+    update t_mentor_skill
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.email != null">
-        email = #{record.email,jdbcType=VARCHAR},
+      <if test="record.skillId != null">
+        skill_id = #{record.skillId,jdbcType=VARCHAR},
       </if>
-      <if test="record.pwd != null">
-        pwd = #{record.pwd,jdbcType=VARCHAR},
+      <if test="record.skillName != null">
+        skill_name = #{record.skillName,jdbcType=VARCHAR},
       </if>
-      <if test="record.role != null">
-        "role" = #{record.role,jdbcType=VARCHAR},
+      <if test="record.mentorId != null">
+        mentor_id = #{record.mentorId,jdbcType=VARCHAR},
       </if>
-      <if test="record.experience != null">
-        experience = #{record.experience,jdbcType=INTEGER},
-      </if>
-      <if test="record.amount != null">
-        amount = #{record.amount,jdbcType=DECIMAL},
+      <if test="record.mentorName != null">
+        mentor_name = #{record.mentorName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -184,54 +172,49 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update t_user
+    update t_mentor_skill
     set id = #{record.id,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      pwd = #{record.pwd,jdbcType=VARCHAR},
-      "role" = #{record.role,jdbcType=VARCHAR},
-      experience = #{record.experience,jdbcType=INTEGER},
-      amount = #{record.amount,jdbcType=DECIMAL}
+      skill_id = #{record.skillId,jdbcType=VARCHAR},
+      skill_name = #{record.skillName,jdbcType=VARCHAR},
+      mentor_id = #{record.mentorId,jdbcType=VARCHAR},
+      mentor_name = #{record.mentorName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wujiabo.fsd.entity.TUser">
-    update t_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.wujiabo.fsd.entity.TMentorSkill">
+    update t_mentor_skill
     <set>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
+      <if test="skillId != null">
+        skill_id = #{skillId,jdbcType=VARCHAR},
       </if>
-      <if test="pwd != null">
-        pwd = #{pwd,jdbcType=VARCHAR},
+      <if test="skillName != null">
+        skill_name = #{skillName,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        "role" = #{role,jdbcType=VARCHAR},
+      <if test="mentorId != null">
+        mentor_id = #{mentorId,jdbcType=VARCHAR},
       </if>
-      <if test="experience != null">
-        experience = #{experience,jdbcType=INTEGER},
-      </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=DECIMAL},
+      <if test="mentorName != null">
+        mentor_name = #{mentorName,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wujiabo.fsd.entity.TUser">
-    update t_user
-    set email = #{email,jdbcType=VARCHAR},
-      pwd = #{pwd,jdbcType=VARCHAR},
-      "role" = #{role,jdbcType=VARCHAR},
-      experience = #{experience,jdbcType=INTEGER},
-      amount = #{amount,jdbcType=DECIMAL}
+  <update id="updateByPrimaryKey" parameterType="com.wujiabo.fsd.entity.TMentorSkill">
+    update t_mentor_skill
+    set skill_id = #{skillId,jdbcType=VARCHAR},
+      skill_name = #{skillName,jdbcType=VARCHAR},
+      mentor_id = #{mentorId,jdbcType=VARCHAR},
+      mentor_name = #{mentorName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.wujiabo.fsd.entity.TUserCriteria" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.wujiabo.fsd.entity.TMentorSkillCriteria" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_user
+    from t_mentor_skill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
