@@ -1,6 +1,6 @@
 package com.wujiabo.fsd.exception;
 
-public class TokenIsExpiredException extends Exception {
+public class TokenIsExpiredException extends RuntimeException {
 
 
     public TokenIsExpiredException() {

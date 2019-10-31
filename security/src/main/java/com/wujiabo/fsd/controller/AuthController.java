@@ -1,6 +1,8 @@
 package com.wujiabo.fsd.controller;
 
 import com.wujiabo.fsd.dto.TUser;
+import com.wujiabo.fsd.dto.User;
+import com.wujiabo.fsd.dto.UserInfoDto;
 import com.wujiabo.fsd.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,5 +22,10 @@ public class AuthController {
     @PostMapping("/register")
     public void register(@RequestBody TUser registerUser) {
         authService.register(registerUser);
+    }
+
+    @PostMapping("/register")
+    public UserInfoDto checkToken(String token) {
+        return authService.checkToken(token);
     }
 }
