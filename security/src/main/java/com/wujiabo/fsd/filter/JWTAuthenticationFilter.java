@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wujiabo.fsd.dto.JwtUser;
 import com.wujiabo.fsd.dto.LoginUser;
 import com.wujiabo.fsd.utils.JwtTokenUtils;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -34,16 +35,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                                 HttpServletResponse response) throws AuthenticationException {
 
         // 从输入流中获取到登录的信息
+        LoginUser loginUser = null;
         try {
-            LoginUser loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
-            rememberMe.set(loginUser.getRememberMe());
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>())
-            );
+            loginUser = new ObjectMapper().readValue(request.getInputStream(), LoginUser.class);
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new AccessDeniedException("get loginUser from request error");
         }
+        rememberMe.set(loginUser.getRememberMe());
+        return authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword(), new ArrayList<>())
+        );
     }
 
     // 成功验证后调用的方法
@@ -60,7 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String role = "";
         Collection<? extends GrantedAuthority> authorities = jwtUser.getAuthorities();
-        for (GrantedAuthority authority : authorities){
+        for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
 
@@ -74,6 +75,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        response.getWriter().write("authentication failed, reason: " + failed.getMessage());
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        String reason = "统一处理，原因：" + failed.getMessage();
+        response.getWriter().write(new ObjectMapper().writeValueAsString(reason));
     }
 }
