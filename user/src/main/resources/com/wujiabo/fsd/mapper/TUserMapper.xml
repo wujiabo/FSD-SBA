@@ -3,8 +3,8 @@
 <mapper namespace="com.wujiabo.fsd.mapper.TUserMapper">
   <resultMap id="BaseResultMap" type="com.wujiabo.fsd.entity.TUser">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, "password", "role"
+    id, email, pwd, "role"
   </sql>
   <select id="selectByExample" parameterType="com.wujiabo.fsd.entity.TUserCriteria" resultMap="BaseResultMap">
     select
@@ -99,9 +99,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.wujiabo.fsd.entity.TUser">
-    insert into t_user (id, username, "password", 
+    insert into t_user (id, email, pwd, 
       "role")
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wujiabo.fsd.entity.TUser">
@@ -110,11 +110,11 @@
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        username,
+      <if test="email != null">
+        email,
       </if>
-      <if test="password != null">
-        "password",
+      <if test="pwd != null">
+        pwd,
       </if>
       <if test="role != null">
         "role",
@@ -124,11 +124,11 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
         #{role,jdbcType=VARCHAR},
@@ -147,11 +147,11 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        "password" = #{record.password,jdbcType=VARCHAR},
+      <if test="record.pwd != null">
+        pwd = #{record.pwd,jdbcType=VARCHAR},
       </if>
       <if test="record.role != null">
         "role" = #{record.role,jdbcType=VARCHAR},
@@ -164,8 +164,8 @@
   <update id="updateByExample" parameterType="map">
     update t_user
     set id = #{record.id,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
-      "password" = #{record.password,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
       "role" = #{record.role,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -174,11 +174,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wujiabo.fsd.entity.TUser">
     update t_user
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        "password" = #{password,jdbcType=VARCHAR},
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
         "role" = #{role,jdbcType=VARCHAR},
@@ -188,8 +188,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wujiabo.fsd.entity.TUser">
     update t_user
-    set username = #{username,jdbcType=VARCHAR},
-      "password" = #{password,jdbcType=VARCHAR},
+    set email = #{email,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
       "role" = #{role,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

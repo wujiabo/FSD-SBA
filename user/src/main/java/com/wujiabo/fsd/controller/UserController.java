@@ -3,9 +3,7 @@ package com.wujiabo.fsd.controller;
 import com.wujiabo.fsd.entity.TUser;
 import com.wujiabo.fsd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,8 +13,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public List<TUser> list(){
         return userService.findAll();
+    }
+
+    @GetMapping("/findByEmail/{email}")
+    public TUser findByEmail(@PathVariable(name = "email", required=true) String email){
+        return userService.findByEmail(email);
+    }
+
+    @PostMapping("/save")
+    public void save(@RequestBody TUser tUser){
+        userService.save(tUser);
     }
 }
