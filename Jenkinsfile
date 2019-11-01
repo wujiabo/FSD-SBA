@@ -19,6 +19,14 @@ node {
       }
    }
    stage('clean none') {
+        bat 'docker image rm -f sba/registry:latest'
+        bat 'docker image rm -f sba/gateway:latest'
+        bat 'docker image rm -f sba/payment:latest'
+        bat 'docker image rm -f sba/search:latest'
+        bat 'docker image rm -f sba/security:latest'
+        bat 'docker image rm -f sba/technology:latest'
+        bat 'docker image rm -f sba/training:latest'
+        bat 'docker image rm -f sba/user:latest'
         bat 'docker rmi $(docker images --filter “dangling=true” -q --no-trunc)'
    }
    stage('registry') {
