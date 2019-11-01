@@ -18,10 +18,10 @@ node {
          bat(/"${mvnHome}\bin\mvn" clean package docker:build/)
       }
    }
-   stage('Deploy registry') {
-    //    bat 'java -jar ./registry/target/registry-1.0-SNAPSHOT.jar'
+   stage('registry') {
+        bat 'docker run -p 9001:9001 -d sba/registry:latest'
    }
-   stage('Deploy') {
-        bat(/"${mvnHome}\bin\mvn" -version/)
+   stage('gateway') {
+        bat 'docker run -p 9001:9001 -d sba/gateway:latest'
    }
 }
