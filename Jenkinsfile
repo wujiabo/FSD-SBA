@@ -18,6 +18,9 @@ node {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
    }
+   stage('Copy') {
+        bat 'cp ${workspace}/registry/target/registry-1.0-SNAPSHOT.jar ${workspace}'
+   }
    stage('Deploy') {
         bat(/"${mvnHome}\bin\mvn" -version/)
    }
