@@ -15,7 +15,7 @@ node {
          sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package -P docker"
 
       } else {
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package -P docker/)
+         bat(/"${mvnHome}\bin\mvn" clean package docker:build/)
       }
    }
    stage('Deploy registry') {
