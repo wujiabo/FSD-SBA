@@ -2,7 +2,6 @@ package com.wujiabo.fsd.service.impl;
 
 import com.wujiabo.fsd.entity.TUser;
 import com.wujiabo.fsd.entity.TUserCriteria;
-import com.wujiabo.fsd.exception.SBAException;
 import com.wujiabo.fsd.mapper.TUserMapper;
 import com.wujiabo.fsd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
     @Autowired
     private TUserMapper tUserMapper;
+
     @Override
     public List<TUser> findAll() {
         TUserCriteria example = new TUserCriteria();
@@ -27,17 +27,17 @@ public class UserServiceImpl implements UserService {
         TUserCriteria example = new TUserCriteria();
         example.createCriteria().andEmailEqualTo(email);
         List<TUser> tUsers = tUserMapper.selectByExample(example);
-        if(CollectionUtils.isEmpty(tUsers)){
-            throw new SBAException();
+        if (CollectionUtils.isEmpty(tUsers)) {
+            return null;
         }
         return tUsers.get(0);
     }
 
     @Override
     public void save(TUser tUser) {
-        if(tUser.getId() != null){
+        if (tUser.getId() != null) {
             tUserMapper.updateByPrimaryKeySelective(tUser);
-        }else{
+        } else {
             tUser.setId(UUID.randomUUID().toString());
             tUserMapper.insertSelective(tUser);
         }

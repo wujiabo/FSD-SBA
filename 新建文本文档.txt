@@ -1,0 +1,8 @@
+mvn package docker:build
+
+docker run -p 9001:9001 -d sba/registry:latest
+
+docker image rm -f sba/registry:latest
+docker image rm -f sba/registry:1.0-SNAPSHOT
+
+docker image prune
