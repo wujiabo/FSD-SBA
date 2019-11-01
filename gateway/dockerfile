@@ -3,5 +3,5 @@ MAINTAINER xxx xx@xxxxx.com
 VOLUME /vol/development
 RUN mkdir -p /vol/development
 WORKDIR /vol/development
-COPY target/*.jar /vol/development/app.jar
+COPY gateway/target/*.jar /vol/development/app.jar
 CMD ["java", "-Xmx200m", "-Djava.security.egd=file:/dev/./urandom","-jar","/vol/development/app.jar"]
