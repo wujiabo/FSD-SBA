@@ -1,31 +1,12 @@
-version : '2'
+version: 'v1.0'
 services:
-  sba-registry:
-    container_name: sba-registry
+  registry:
+    container_name: registry
+    restart: always
     build:
       context: .
       dockerfile: registry/dockerfile
+    volumes:
+      - .:/code
     ports:
       - "9001:9001"
-    networks:
-      - net-spring-db
-    volumes:
-      - /vol/development
-  sba-gateway:
-    container_name: sba-gateway
-    build:
-      context: .
-      dockerfile: gateway/dockerfile
-    ports:
-      - "9002:9002"
-    networks:
-      - net-spring-db
-    volumes:
-      - /vol/development
-    depends_on:
-      - sba-registry
-    links:
-      - sba-registry
-networks:
-  net-spring-db:
-    driver: bridge
