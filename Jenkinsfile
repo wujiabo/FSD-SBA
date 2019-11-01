@@ -27,7 +27,7 @@ node {
         bat 'docker image rm -f sba/technology:latest'
         bat 'docker image rm -f sba/training:latest'
         bat 'docker image rm -f sba/user:latest'
-        bat 'docker rmi $(docker images --filter “dangling=true” -q --no-trunc)'
+        bat 'docker image prune -f'
    }
    stage('registry') {
         bat 'docker run -p 9001:9001 -d sba/registry:latest'
