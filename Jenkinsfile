@@ -19,8 +19,6 @@ node {
       }
    }
    stage('Deploy') {
-      steps {
-         bat "java -jar ./registry/target/registry-1.0-SNAPSHOT.jar"
-      }
+        bat(/java -jar ./registry/target/registry-1.0-SNAPSHOT.jar/)
    }
 }
