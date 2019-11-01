@@ -2,23 +2,12 @@ node {
    def mvnHome
    def workspace = pwd()
    stage('Preparation') { // for display purposes
-      // Get some code from a GitHub repository
-      git 'https://github.com/wujiabo/FSD-SBA.git'
-      // Get the Maven tool.
-      // ** NOTE: This 'maven' Maven tool must be configured
-      // ** in the global configuration.
-      mvnHome = tool 'maven'
-   }
-   stage('Build') {
-      // Run the maven build
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package -P docker"
-
-      } else {
-         bat(/"${mvnHome}\bin\mvn" clean package docker:build/)
-      }
-   }
-   stage('clean none') {
+        // Get some code from a GitHub repository
+        git 'https://github.com/wujiabo/FSD-SBA.git'
+        // Get the Maven tool.
+        // ** NOTE: This 'maven' Maven tool must be configured
+        // ** in the global configuration.
+        mvnHome = tool 'maven'
         bat 'docker image rm -f sba/registry:latest'
         bat 'docker image rm -f sba/gateway:latest'
         bat 'docker image rm -f sba/payment:latest'
@@ -28,6 +17,15 @@ node {
         bat 'docker image rm -f sba/training:latest'
         bat 'docker image rm -f sba/user:latest'
         bat 'docker image prune -f'
+   }
+   stage('Build') {
+      // Run the maven build
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package -P docker"
+
+      } else {
+         bat(/"${mvnHome}\bin\mvn" clean package docker:build/)
+      }
    }
    stage('registry') {
         bat 'docker run -p 9001:9001 -d sba/registry:latest'
