@@ -19,7 +19,7 @@ node {
       }
    }
    stage('Deploy registry') {
-        bat 'java -jar ./registry/target/registry-1.0-SNAPSHOT.jar'
+    //    bat 'java -jar ./registry/target/registry-1.0-SNAPSHOT.jar'
    }
    stage('Deploy') {
         bat(/"${mvnHome}\bin\mvn" -version/)
