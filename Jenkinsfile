@@ -5,7 +5,7 @@ node {
       // Get some code from a GitHub repository
       git 'https://github.com/wujiabo/FSD-SBA.git'
       // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
+      // ** NOTE: This 'maven' Maven tool must be configured
       // ** in the global configuration.
       mvnHome = tool 'maven'
    }
@@ -19,6 +19,8 @@ node {
       }
    }
    stage('Deploy') {
-      sh "'/scripts/deploy.sh' ${workspace} deploy"
+      steps {
+         bat "java -jar ./registry/target/registry-1.0-SNAPSHOT.jar"
+      }
    }
 }
