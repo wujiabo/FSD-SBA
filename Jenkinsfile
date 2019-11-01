@@ -18,10 +18,13 @@ node {
          bat(/"${mvnHome}\bin\mvn" clean package docker:build/)
       }
    }
+   stage('clean none') {
+        bat 'docker rmi $(docker images --filter “dangling=true” -q --no-trunc)'
+   }
    stage('registry') {
         bat 'docker run -p 9001:9001 -d sba/registry:latest'
    }
    stage('gateway') {
-        bat 'docker run -p 9001:9001 -d sba/gateway:latest'
+        bat 'docker run -p 9002:9002 -d sba/gateway:latest'
    }
 }
