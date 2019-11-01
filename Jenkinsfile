@@ -19,6 +19,6 @@ node {
       }
    }
    stage('Deploy') {
-        bat(/"cmd" java -jar ./registry/target/registry-1.0-SNAPSHOT.jar/)
+        bat(/"${mvnHome}\bin\mvn" -version/)
    }
 }
