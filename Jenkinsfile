@@ -19,7 +19,7 @@ node {
       }
    }
    stage('Copy') {
-        bat 'copy ${workspace}/registry/target/registry-1.0-SNAPSHOT.jar ${workspace}'
+        bat 'copy $workspace/registry/target/registry-1.0-SNAPSHOT.jar $workspace'
    }
    stage('Deploy') {
         bat(/"${mvnHome}\bin\mvn" -version/)
