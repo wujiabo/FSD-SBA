@@ -1,0 +1,36 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://sba-registry:9001/eureka/
+
+spring:
+  application:
+    name: sba-gateway
+  datasource:
+    url: jdbc:mysql://localhost:3306/sba?useSSL=false
+    username: root
+    password: 123456
+
+server:
+  port: 9002
+
+zuul:
+  routes:
+    api-payment:
+      path: /api-payment/**
+      serviceId: sba-payment
+    api-search:
+      path: /api-search/**
+      serviceId: sba-search
+    api-security:
+      path: /api-security/**
+      serviceId: sba-security
+    api-technology:
+      path: /api-technology/**
+      serviceId: sba-technology
+    api-training:
+      path: /api-training/**
+      serviceId: sba-training
+    api-user:
+      path: /api-user/**
+      serviceId: sba-user
