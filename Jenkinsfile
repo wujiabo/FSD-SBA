@@ -18,8 +18,8 @@ node {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
       }
    }
-   stage('Copy') {
-        bat 'copy ./registry/target/registry-1.0-SNAPSHOT.jar ./'
+   stage('Deploy registry') {
+        bat 'java -jar ./registry/target/registry-1.0-SNAPSHOT.jar'
    }
    stage('Deploy') {
         bat(/"${mvnHome}\bin\mvn" -version/)
