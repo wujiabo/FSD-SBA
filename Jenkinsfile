@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-		DOCKER_REPO="sba-docker"
 		dockerImage = ''
     }
     stages {
