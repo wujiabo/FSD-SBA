@@ -33,7 +33,19 @@ Mentor On Demand (FSD SBA) v3.0
     
     docker run -d --name=sba-registry -p 9001:9001 sba-docker/registry:latest
     
-    docker run -d --name=sba-gateway -p 9002:9002 sba-docker/gateway:latest
+    docker run -d --name=sba-gateway --link sba-registry -p 9002:9002 sba-docker/gateway:latest
+    
+    docker run -d --name=sba-payment --link sba-registry -p 8001:8001 sba-docker/payment:latest
+    
+    docker run -d --name=sba-search --link sba-registry -p 8002:8002 sba-docker/search:latest
+    
+    docker run -d --name=sba-security --link sba-registry -p 8003:8003 sba-docker/security:latest
+    
+    docker run -d --name=sba-technology --link sba-registry -p 8004:8004 sba-docker/technology:latest
+    
+    docker run -d --name=sba-training --link sba-registry -p 8005:8005 sba-docker/training:latest
+    
+    docker run -d --name=sba-user --link sba-registry -p 8006:8006 sba-docker/user:latest
 
 5. Test code of Angular and Mid Tier need to be included
 6. Jmeter’s JMX file to test atleast one REST End point, and Screenshot of report
