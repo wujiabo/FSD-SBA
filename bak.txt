@@ -1,0 +1,54 @@
+mvn package docker:build
+
+docker run -p 9001:9001 -d sba/registry:latest
+
+docker image rm -f sba/registry:latest
+docker image rm -f sba/registry:1.0-SNAPSHOT
+
+docker images -f “dangling=true” -q
+docker rmi $(docker images --filter “dangling=true” -q --no-trunc)
+
+
+docker image prune -f
+
+
+docker exec -it XXXXXXX sh
+
+docker run -d --name=sba-registry --link -p 9001:9001 sba-docker/registry:latest
+docker run -d --name=sba-gateway --link -p 9002:9002 sba-docker/gateway:latest
+
+docker run --name=sba-registry -p 9001:9001 sba-docker/registry:latest
+docker run --name=sba-gateway --link sba-registry -p 9002:9002 sba-docker/gateway:latest
+
+docker attach XXXXXXX
+docker exec -it XXXXXXX sh
+
+
+
+docker exec -it 2b994450ba90 /bin/bash
+
+
+
+kubectl create namespace sba
+kubectl get ns
+kubectl apply -f deployment.yaml
+
+
+PS C:\Users\JiaBoWu\Downloads\FSD\FSD-SBA\registry> kubectl create namespace sba
+namespace/sba created
+PS C:\Users\JiaBoWu\Downloads\FSD\FSD-SBA\registry> kubectl get ns
+NAME              STATUS   AGE
+default           Active   10d
+docker            Active   10d
+kube-node-lease   Active   10d
+kube-public       Active   10d
+kube-system       Active   10d
+sba               Active   22s
+PS C:\Users\JiaBoWu\Downloads\FSD\FSD-SBA\registry> kubectl apply -f deployment.yaml
+deployment.apps/sba-registry created
+
+
+docker push wujiabo1985/registry:latest
+
+kubectl apply -f deployment.yaml
+kubectl delete -f deployment.yaml
