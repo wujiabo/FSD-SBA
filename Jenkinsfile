@@ -1,36 +1,24 @@
-node {
-   def mvnHome
-   def workspace = pwd()
-   stage('Preparation') { // for display purposes
-        // Get some code from a GitHub repository
-        git 'https://github.com/wujiabo/FSD-SBA.git'
-        // Get the Maven tool.
-        // ** NOTE: This 'maven' Maven tool must be configured
-        // ** in the global configuration.
-        mvnHome = tool 'maven'
-        bat 'docker image rm -f sba/registry:latest'
-        bat 'docker image rm -f sba/gateway:latest'
-        bat 'docker image rm -f sba/payment:latest'
-        bat 'docker image rm -f sba/search:latest'
-        bat 'docker image rm -f sba/security:latest'
-        bat 'docker image rm -f sba/technology:latest'
-        bat 'docker image rm -f sba/training:latest'
-        bat 'docker image rm -f sba/user:latest'
-        bat 'docker image prune -f'
-   }
-   stage('Build') {
-      // Run the maven build
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package -P docker"
-
-      } else {
-         bat(/"${mvnHome}\bin\mvn" clean package docker:build/)
-      }
-   }
-   stage('registry') {
-        bat 'docker run -p 9001:9001 -d sba/registry:latest'
-   }
-   stage('gateway') {
-        bat 'docker run -p 9002:9002 -d sba/gateway:latest'
-   }
+pipeline {
+    agent any
+    environment {
+		DOCKER_REPO="sba-docker"
+		dockerImage = ''
+    }
+    stages {
+    	stage('CheckOut Code'){
+         	steps{
+            	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/wujiabo/FSD-SBA.git']]])
+            }
+        }
+        stage('Maven Build'){
+        	steps{
+        	    bat 'mvn clean package -DskipTests'
+        	}
+        }
+        stage('Image Build'){
+        	steps{
+        	    bat 'mvn dockerfile:build'
+        	}
+        }
+    }
 }
