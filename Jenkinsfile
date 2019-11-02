@@ -20,5 +20,10 @@ pipeline {
         	    bat 'mvn dockerfile:build'
         	}
         }
+        stage('Remove Unused Image'){
+        	steps{
+        	    bat 'docker image prune -f'
+        	}
+        }
     }
 }

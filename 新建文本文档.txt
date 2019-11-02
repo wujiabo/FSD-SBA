@@ -7,3 +7,6 @@ docker image rm -f sba/registry:1.0-SNAPSHOT
 
 docker images -f “dangling=true” -q
 docker rmi $(docker images --filter “dangling=true” -q --no-trunc)
+
+
+docker image prune -f
