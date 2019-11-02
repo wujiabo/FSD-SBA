@@ -10,3 +10,7 @@ docker rmi $(docker images --filter “dangling=true” -q --no-trunc)
 
 
 docker image prune -f
+
+
+docker attach XXXXXXX
+docker exec -it XXXXXXX /bin/bash

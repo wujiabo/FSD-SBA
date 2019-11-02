@@ -14,4 +14,4 @@ ARG JAR_FILE=target/training-1.0-SNAPSHOT.jar
 ADD ${JAR_FILE} app.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=k8s","-jar","/app.jar"]

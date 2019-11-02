@@ -30,6 +30,10 @@ Mentor On Demand (FSD SBA) v3.0
     mvn clean package
 
     mvn dockerfile:build
+    
+    docker run -d --name=sba-registry -p 9001:9001 sba-docker/registry:latest
+    
+    docker run -d --name=sba-gateway -p 9002:9002 sba-docker/gateway:latest
 
 5. Test code of Angular and Mid Tier need to be included
 6. Jmeter’s JMX file to test atleast one REST End point, and Screenshot of report
