@@ -1,36 +1,179 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9001/eureka/
-
 spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
   application:
     name: sba-gateway
-  datasource:
-    url: jdbc:mysql://localhost:3306/sba?useSSL=false
-    username: root
-    password: 123456
-
 server:
   port: 9002
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka
+  instance:
+    securePortEnabled: true
+    instance-id: ${spring.application.name}:${server.port}
+
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+# 网关配置
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false # 停用超时设置
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+
+swagger.enabled: true
+
+
+apiurl:
+  gatewayurl: http://localhost:9002
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
 zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
   routes:
-    api-payment:
-      path: /api-payment/**
+    sba-payment:
+      path: /payment/**
       serviceId: sba-payment
-    api-search:
-      path: /api-search/**
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-search:
+      path: /search/**
       serviceId: sba-search
-    api-security:
-      path: /api-security/**
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-security:
+      path: /security/**
       serviceId: sba-security
-    api-technology:
-      path: /api-technology/**
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers 
+    sba-technology:
+      path: /technology/**
       serviceId: sba-technology
-    api-training:
-      path: /api-training/**
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-training:
+      path: /training/**
       serviceId: sba-training
-    api-user:
-      path: /api-user/**
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-user:
+      path: /user/**
       serviceId: sba-user
+      stripPrefix: false
+      sensitiveHeaders:
+
+---
+spring:
+  profiles: k8s
+  application:
+    name: sba-gateway
+server:
+  port: 9002
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://sba-registry:9001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+# 服务管理配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        #暴漏的接口，"*"表示所有web监控接口
+        exclude:            #不暴漏的接口
+      base-path: /actuator  #监控根路径
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+  # 网关配置
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false # 停用超时设置
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+
+swagger.enabled: true
+
+apiurl:
+  gatewayurl: http://sba-gateway:9002
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    sba-payment:
+      path: /payment/**
+      serviceId: sba-payment
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-search:
+      path: /search/**
+      serviceId: sba-search
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-security:
+      path: /security/**
+      serviceId: sba-security
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers 
+    sba-technology:
+      path: /technology/**
+      serviceId: sba-technology
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-training:
+      path: /training/**
+      serviceId: sba-training
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-user:
+      path: /user/**
+      serviceId: sba-user
+      stripPrefix: false
+      sensitiveHeaders:
