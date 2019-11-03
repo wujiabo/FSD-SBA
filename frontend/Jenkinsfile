@@ -11,9 +11,9 @@ pipeline {
         }
         stage('Angular Build'){
         	steps{
-                sh 'mkdir -p server/public'
-                sh 'npm install'
-                sh 'ng build --prod'
+                bat 'mkdir -p server/public'
+                bat 'npm install'
+                bat 'ng build --prod'
         	}
         }
         stage('Image Build'){
@@ -35,7 +35,7 @@ pipeline {
         }
 		stage('Remove Image') {
             steps{
-                sh "docker rmi wujiabo1985/frontend"
+                bat "docker rmi wujiabo1985/frontend"
             }
         }
    }
