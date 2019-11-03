@@ -29,7 +29,6 @@ export class UserSignupComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       role: new FormControl('', Validators.required)
@@ -44,9 +43,8 @@ export class UserSignupComponent implements OnInit {
   addUser(userFormValue) {
     if (this.userForm.valid) {
       const user: NewUser = {
-        name: userFormValue.name,
-        username: userFormValue.email,
-        password: userFormValue.password,
+        email: userFormValue.email,
+        pwd: userFormValue.password,
         role: userFormValue.role
       };
       this.submitted = true;

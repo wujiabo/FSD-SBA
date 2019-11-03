@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, email, pwd, "role", experience, amount
+    id, email, pwd, `role`, experience, amount
   </sql>
   <select id="selectByExample" parameterType="com.wujiabo.fsd.entity.TUserCriteria" resultMap="BaseResultMap">
     select
@@ -102,7 +102,7 @@
   </delete>
   <insert id="insert" parameterType="com.wujiabo.fsd.entity.TUser">
     insert into t_user (id, email, pwd, 
-      "role", experience, amount
+      `role`, experience, amount
       )
     values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR}, #{experience,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}
@@ -121,7 +121,7 @@
         pwd,
       </if>
       <if test="role != null">
-        "role",
+        `role`,
       </if>
       <if test="experience != null">
         experience,
@@ -170,7 +170,7 @@
         pwd = #{record.pwd,jdbcType=VARCHAR},
       </if>
       <if test="record.role != null">
-        "role" = #{record.role,jdbcType=VARCHAR},
+        `role` = #{record.role,jdbcType=VARCHAR},
       </if>
       <if test="record.experience != null">
         experience = #{record.experience,jdbcType=INTEGER},
@@ -188,7 +188,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       pwd = #{record.pwd,jdbcType=VARCHAR},
-      "role" = #{record.role,jdbcType=VARCHAR},
+      `role` = #{record.role,jdbcType=VARCHAR},
       experience = #{record.experience,jdbcType=INTEGER},
       amount = #{record.amount,jdbcType=DECIMAL}
     <if test="_parameter != null">
@@ -205,7 +205,7 @@
         pwd = #{pwd,jdbcType=VARCHAR},
       </if>
       <if test="role != null">
-        "role" = #{role,jdbcType=VARCHAR},
+        `role` = #{role,jdbcType=VARCHAR},
       </if>
       <if test="experience != null">
         experience = #{experience,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
     update t_user
     set email = #{email,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},
-      "role" = #{role,jdbcType=VARCHAR},
+      `role` = #{role,jdbcType=VARCHAR},
       experience = #{experience,jdbcType=INTEGER},
       amount = #{amount,jdbcType=DECIMAL}
     where id = #{id,jdbcType=VARCHAR}

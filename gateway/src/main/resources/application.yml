@@ -61,32 +61,32 @@ zuul:
     sba-payment:
       path: /payment/**
       serviceId: sba-payment
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-search:
       path: /search/**
       serviceId: sba-search
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-security:
       path: /security/**
       serviceId: sba-security
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers 
     sba-technology:
       path: /technology/**
       serviceId: sba-technology
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-training:
       path: /training/**
       serviceId: sba-training
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-user:
       path: /user/**
       serviceId: sba-user
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
 
 ---
@@ -150,30 +150,30 @@ zuul:
     sba-payment:
       path: /payment/**
       serviceId: sba-payment
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-search:
       path: /search/**
       serviceId: sba-search
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-security:
       path: /security/**
       serviceId: sba-security
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers 
     sba-technology:
       path: /technology/**
       serviceId: sba-technology
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-training:
       path: /training/**
       serviceId: sba-training
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:
     sba-user:
       path: /user/**
       serviceId: sba-user
-      stripPrefix: false
+      stripPrefix: true
       sensitiveHeaders:

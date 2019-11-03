@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, user_name, mentor_id, mentor_name, training_id, "status"
+    id, user_id, user_name, mentor_id, mentor_name, training_id, `status`
   </sql>
   <select id="selectByExample" parameterType="com.wujiabo.fsd.entity.TUserTrainingCriteria" resultMap="BaseResultMap">
     select
@@ -104,7 +104,7 @@
   <insert id="insert" parameterType="com.wujiabo.fsd.entity.TUserTraining">
     insert into t_user_training (id, user_id, user_name, 
       mentor_id, mentor_name, training_id, 
-      "status")
+      `status`)
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{mentorId,jdbcType=VARCHAR}, #{mentorName,jdbcType=VARCHAR}, #{trainingId,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR})
@@ -131,7 +131,7 @@
         training_id,
       </if>
       <if test="status != null">
-        "status",
+        `status`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -186,7 +186,7 @@
         training_id = #{record.trainingId,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
-        "status" = #{record.status,jdbcType=VARCHAR},
+        `status` = #{record.status,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -201,7 +201,7 @@
       mentor_id = #{record.mentorId,jdbcType=VARCHAR},
       mentor_name = #{record.mentorName,jdbcType=VARCHAR},
       training_id = #{record.trainingId,jdbcType=VARCHAR},
-      "status" = #{record.status,jdbcType=VARCHAR}
+      `status` = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -225,7 +225,7 @@
         training_id = #{trainingId,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        "status" = #{status,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -237,7 +237,7 @@
       mentor_id = #{mentorId,jdbcType=VARCHAR},
       mentor_name = #{mentorName,jdbcType=VARCHAR},
       training_id = #{trainingId,jdbcType=VARCHAR},
-      "status" = #{status,jdbcType=VARCHAR}
+      `status` = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.wujiabo.fsd.entity.TUserTrainingCriteria" resultMap="BaseResultMap">

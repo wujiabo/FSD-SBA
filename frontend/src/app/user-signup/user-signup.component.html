@@ -12,12 +12,6 @@
         <div class="login-main-container">
             <h2>Sign Up Mentor On Demand</h2>
             <mat-form-field>
-                <input matInput placeholder="Enter your name" formControlName="name" id="name" required>
-                <mat-error *ngIf="hasError('name', 'required')">
-                    You must enter a name
-                  </mat-error>
-              </mat-form-field>
-            <mat-form-field>
               <input matInput placeholder="Enter your email" formControlName="email" id="email" required>
               <mat-error *ngIf="hasError('email', 'required')">You must enter a email</mat-error>
               <mat-error *ngIf="hasError('email', 'email')">Not a valid email</mat-error>

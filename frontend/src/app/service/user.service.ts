@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   addUser(user: NewUser) {
-    return this.http.post(`${environment.gatewayurl}/account/api/v1/add`, user);
+    return this.http.post(`${environment.gatewayurl}/security/api/auth/register`, user);
   }
 
   findUser(username: string) {

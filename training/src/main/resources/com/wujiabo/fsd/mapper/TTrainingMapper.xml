@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, skill_id, skill_name, mentor_id, mentor_name, fees, start_date, end_date, "status", 
+    id, skill_id, skill_name, mentor_id, mentor_name, fees, start_date, end_date, `status`, 
     progress
   </sql>
   <select id="selectByExample" parameterType="com.wujiabo.fsd.entity.TTrainingCriteria" resultMap="BaseResultMap">
@@ -108,7 +108,7 @@
   <insert id="insert" parameterType="com.wujiabo.fsd.entity.TTraining">
     insert into t_training (id, skill_id, skill_name, 
       mentor_id, mentor_name, fees, 
-      start_date, end_date, "status", 
+      start_date, end_date, `status`, 
       progress)
     values (#{id,jdbcType=VARCHAR}, #{skillId,jdbcType=VARCHAR}, #{skillName,jdbcType=VARCHAR}, 
       #{mentorId,jdbcType=VARCHAR}, #{mentorName,jdbcType=VARCHAR}, #{fees,jdbcType=DECIMAL}, 
@@ -143,7 +143,7 @@
         end_date,
       </if>
       <if test="status != null">
-        "status",
+        `status`,
       </if>
       <if test="progress != null">
         progress,
@@ -216,7 +216,7 @@
         end_date = #{record.endDate,jdbcType=DATE},
       </if>
       <if test="record.status != null">
-        "status" = #{record.status,jdbcType=VARCHAR},
+        `status` = #{record.status,jdbcType=VARCHAR},
       </if>
       <if test="record.progress != null">
         progress = #{record.progress,jdbcType=INTEGER},
@@ -236,7 +236,7 @@
       fees = #{record.fees,jdbcType=DECIMAL},
       start_date = #{record.startDate,jdbcType=DATE},
       end_date = #{record.endDate,jdbcType=DATE},
-      "status" = #{record.status,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
       progress = #{record.progress,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -267,7 +267,7 @@
         end_date = #{endDate,jdbcType=DATE},
       </if>
       <if test="status != null">
-        "status" = #{status,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
       </if>
       <if test="progress != null">
         progress = #{progress,jdbcType=INTEGER},
@@ -284,7 +284,7 @@
       fees = #{fees,jdbcType=DECIMAL},
       start_date = #{startDate,jdbcType=DATE},
       end_date = #{endDate,jdbcType=DATE},
-      "status" = #{status,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
       progress = #{progress,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
