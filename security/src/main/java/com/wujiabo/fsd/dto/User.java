@@ -10,6 +10,8 @@ public class User {
 
     private String role;
 
+    private String token;
+
     public String getId() {
         return id;
     }
@@ -42,13 +44,22 @@ public class User {
         this.role = role;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

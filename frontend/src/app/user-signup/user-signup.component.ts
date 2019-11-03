@@ -54,17 +54,10 @@ export class UserSignupComponent implements OnInit {
 
       this.loading = true;
       this.userService.addUser(user)
-        .pipe(first())
         .subscribe(
             data => {
-              // tslint:disable-next-line:no-string-literal
-              if (data['code'] === 202) {
-                this.alertService.warn('Account exist');
-                this.loading = false;
-              } else {
                 this.alertService.success('Registration successful', true);
                 this.router.navigate(['/login']);
-              }
             },
             error => {
                 this.alertService.error(error);

@@ -3,6 +3,7 @@ package com.wujiabo.fsd.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wujiabo.fsd.dto.JwtUser;
 import com.wujiabo.fsd.dto.LoginUser;
+import com.wujiabo.fsd.dto.User;
 import com.wujiabo.fsd.utils.JwtTokenUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -71,7 +74,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的时候应该是 `Bearer token`
 //        response.setHeader("token", token);
-        response.getWriter().write(token);
+        User user = new User();
+        user.setUsername(jwtUser.getUsername());
+        user.setRole(role);
+        user.setToken(token);
+        response.getWriter().write(new ObjectMapper().writeValueAsString(user));
     }
 
     @Override

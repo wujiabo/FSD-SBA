@@ -26,14 +26,15 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
 }
 
-  login(email, pwd) {
-    return this.http.post<any>(`${environment.gatewayurl}/security/api/auth/login`, { email, pwd })
-            .pipe(map(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return user;
-        }));
+  login(username, password) {
+    const rememberMe = 0;
+    return this.http.post<any>(`${environment.gatewayurl}/security/api/auth/login`, { username, password, rememberMe })
+        .pipe(map(user => {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.currentUserSubject.next(user);
+                    return user;
+                }));
   }
 
 logout() {
