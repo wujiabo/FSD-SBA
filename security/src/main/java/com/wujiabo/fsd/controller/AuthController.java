@@ -5,6 +5,7 @@ import com.wujiabo.fsd.dto.User;
 import com.wujiabo.fsd.dto.UserInfoDto;
 import com.wujiabo.fsd.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,14 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public void register(@RequestBody TUser registerUser) {
+    public ResponseEntity<Void> register(@RequestBody TUser registerUser) {
         authService.register(registerUser);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/checkToken")
-    public UserInfoDto checkToken(String token) {
-        return authService.checkToken(token);
+    public ResponseEntity<UserInfoDto> checkToken(String token) {
+        UserInfoDto userInfoDto = authService.checkToken(token);
+        return ResponseEntity.ok(userInfoDto);
     }
 }
