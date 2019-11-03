@@ -1,7 +1,7 @@
 {
-  "name": "front-server",
+  "name": "frontend-server",
   "version": "1.0.0",
-  "description": "the front web server",
+  "description": "the frontend web server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
