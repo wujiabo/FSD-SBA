@@ -8,7 +8,7 @@ spring:
     name: sba-user
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:jdbc:mysql://localhost:3306/sba?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/sba?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
 server:
