@@ -15,11 +15,6 @@ public class TestController {
     @Autowired
     private SearchFeign searchFeign;
 
-    @GetMapping("/hello")
-    public String hello() {
-        return searchFeign.testSearch();
-    }
-
     @GetMapping("/")
     public String home() {
         return "Hello world ,port:" + port;
