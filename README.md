@@ -25,6 +25,13 @@ Mentor On Demand (FSD SBA) v3.0
     8006    user
 
 3. Screen shots of Usage of Post Man tool to test each End Point of all Microservices
+
+    Use Talend API TESTER.
+    
+    TalendAPITESTER1.jpg
+    
+    TalendAPITESTER2.jpg
+    
 4. Few Steps on how to run the solution.
 
     mvn clean package
@@ -48,6 +55,11 @@ Mentor On Demand (FSD SBA) v3.0
     docker run -d --name=sba-user --link sba-registry -p 8006:8006 wujiabo1985/user:latest
 
 5. Test code of Angular and Mid Tier need to be included
+
+    Run ng test to execute the frontend test
+    
+    Run mvn clean test to execute the backend test
+
 6. Jmeter’s JMX file to test atleast one REST End point, and Screenshot of report
 7. Dockerfile
 
@@ -72,4 +84,6 @@ Mentor On Demand (FSD SBA) v3.0
     FSD-SBA/Jenkinsfile
 
 9. URL where the Project is deployed
+
+    http://localhost:4200/
 
