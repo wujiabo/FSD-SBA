@@ -50,7 +50,7 @@
                     </div>
                 </mat-grid-tile>
                 <mat-grid-tile colspan=1 rowspan=1>
-                     <div *ngIf="course.rate > 0" class="course-actions">
+                     <div *ngIf="course.progress > 0" class="course-actions">
                             <button mat-icon-button color="accent">
                                 <mat-icon matBadge={{course.progress}} matBadgeColor="warn" matBadgeSize="small">star</mat-icon>
                               </button>
