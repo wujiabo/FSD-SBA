@@ -52,7 +52,6 @@ export class UserLoginComponent implements OnInit {
       this.authenticationService.login(loginFormValue.email, loginFormValue.password)
           .subscribe(
             data => {
-              debugger
               this.router.navigate([this.returnUrl]);
             },
               error => {

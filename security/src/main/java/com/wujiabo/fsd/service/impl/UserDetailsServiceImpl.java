@@ -5,6 +5,7 @@ import com.wujiabo.fsd.dto.TUser;
 import com.wujiabo.fsd.dto.User;
 import com.wujiabo.fsd.feign.UserFeign;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,7 +19,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TUser tUser = userFeign.findByEmail(username);
+        ResponseEntity<TUser> responseEntity = userFeign.findByEmail(username);
+        TUser tUser = responseEntity.getBody();
         User user = new User();
         user.setRole(tUser.getRole());
         user.setUsername(tUser.getEmail());

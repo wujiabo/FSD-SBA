@@ -18,4 +18,10 @@ public class TrainingServiceImpl implements TrainingService {
         TTrainingCriteria example = new TTrainingCriteria();
         return tTrainingMapper.selectByExample(example);
     }
+
+    @Override
+    public List<TTraining> findMyTrainings(String userId) {
+        TTrainingCriteria example = new TTrainingCriteria();
+        return tTrainingMapper.selectByExample(example);
+    }
 }

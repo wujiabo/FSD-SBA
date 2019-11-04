@@ -5,6 +5,7 @@ import com.wujiabo.fsd.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +23,9 @@ public class TrainingController {
         return ResponseEntity.ok(trainings);
     }
 
+    @GetMapping("/my/list")
+    public ResponseEntity<List<TTraining>> findMyTrainings() {
+        List<TTraining> trainings = trainingService.findMyTrainings("");
+        return ResponseEntity.ok(trainings);
+    }
 }
