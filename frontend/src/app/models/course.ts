@@ -1,11 +1,12 @@
 export interface Course {
   id: number;
-  name: string;
+  mentorId: string;
   mentorName: string;
-  skill: string;
+  skillId: string;
+  skillName: string;
   startDate: Date;
   endDate: Date;
-  fee: number;
-  rate: number;
-  description: string;
+  fees: number;
+  progress: number;
+  status: string;
 }

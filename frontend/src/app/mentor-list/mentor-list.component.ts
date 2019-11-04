@@ -26,11 +26,9 @@ export class MentorListComponent implements OnInit {
     this.showCourse = true;
     this.courseservice.findCourses().subscribe(courses => {
       // tslint:disable-next-line:no-string-literal
-      if (courses['code'] === 200) {
         // tslint:disable-next-line:no-string-literal
-        this.courses = courses['data'];
+        this.courses = courses;
         this.showCourse = false;
-      }
     },
     error => {
           this.alertService.error(error);

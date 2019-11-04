@@ -9,8 +9,8 @@
       <mat-card-header>
         <div mat-card-avatar
         [ngStyle]="{'background-image': 'url(assets/images/heroes/' + course.id + '-thumbnail.jpg)', 'background-size':'cover'}"></div>
-        <mat-card-title><span class="label">Skill: </span>{{course.skill}}</mat-card-title>
-        <mat-card-subtitle><span class="label">Course Name: </span>{{ course.name }}</mat-card-subtitle>
+        <mat-card-title><span class="label">Skill: </span>{{course.skillName}}</mat-card-title>
+        <mat-card-subtitle><span class="label">Course Name: </span>{{ course.skillName }}</mat-card-subtitle>
         <span class="mat-header-spacer"></span>
         <div *ngIf="userRole === 'user'">
         <button mat-icon-button color="primary">
@@ -27,7 +27,7 @@
               </mat-grid-tile>
               <mat-grid-tile>
                   <div class="text-inside-grid">
-                  <span class="label">Fee: </span><span>$</span>{{course.fee}}
+                  <span class="label">Fee: </span><span>$</span>{{course.fees}}
                   </div>
                 </mat-grid-tile>
                 <mat-grid-tile colspan=1 rowspan=1>
@@ -37,15 +37,9 @@
                   </mat-grid-tile>
                 <mat-grid-tile>
                     <div class="text-inside-grid">
-                        <span class="label">Duration: </span>
+                        <span class="label">Status: </span>{{course.status}}
                         </div>
                   </mat-grid-tile>
-
-                  <mat-grid-tile colspan=2 rowspan=1>
-                      <div class="text-inside-grid">
-                      <span class="label">Description: </span>{{course.description}}
-                    </div>
-                    </mat-grid-tile>
             </mat-grid-list>
       </mat-card-content>
       <mat-card-actions>
@@ -58,7 +52,7 @@
                 <mat-grid-tile colspan=1 rowspan=1>
                      <div *ngIf="course.rate > 0" class="course-actions">
                             <button mat-icon-button color="accent">
-                                <mat-icon matBadge={{course.rate}} matBadgeColor="warn" matBadgeSize="small">star</mat-icon>
+                                <mat-icon matBadge={{course.progress}} matBadgeColor="warn" matBadgeSize="small">star</mat-icon>
                               </button>
                             </div>
                   </mat-grid-tile>
