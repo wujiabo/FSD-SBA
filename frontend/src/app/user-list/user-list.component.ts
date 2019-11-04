@@ -73,20 +73,8 @@ export class UserListComponent implements OnInit {
     } else {
       this.showCourse = true;
       this.courseservice.findUserCourses(tab.index, this.username).subscribe(data => {
-      // tslint:disable-next-line:no-string-literal
-      if (data['code'] === 200) {
-        // tslint:disable-next-line:no-string-literal
         this.showCourse = false;
-        this.courses = data['data'];
-        // tslint:disable-next-line:no-string-literal
-        this.alertService.success(data['message']);
-      // tslint:disable-next-line:no-string-literal
-      } else if (data['code'] === 404) {
-        // tslint:disable-next-line:no-string-literal
-        this.showCourse = false;
-        // tslint:disable-next-line:no-string-literal
-        this.alertService.warn(data['message']);
-      }
+        this.courses = data;
     },
     error => {
       this.showCourse = false;
