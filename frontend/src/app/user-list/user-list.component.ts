@@ -14,6 +14,7 @@ export class UserListComponent implements OnInit {
   courses: any;
   showCourse: boolean;
   showInProgressCourse: boolean;
+  showCompletedCourse: boolean;
   @Input() userRole: string;
   @Input() searchText: string;
   rating: string;
