@@ -7,22 +7,15 @@
 
 
             <input formControlName="mentorName" type="hidden">
-        <mat-grid-tile>
-    <mat-form-field style="width: 205px;">
-
-        <input matInput
-                placeholder="Course Name"
-               formControlName="name">
-
-    </mat-form-field>
-    </mat-grid-tile>
 
     <mat-grid-tile>
     <mat-form-field style="width: 205px;">
 
-        <input matInput
-        placeholder="Skill"
-       formControlName="skill">
+        <mat-label>Skill</mat-label>
+        <select matNativeControl formControlName="skillId" id="skillId" required>
+            <option value="1">JAVA</option>
+            <option value="2">C++</option>
+        </select>
 
     </mat-form-field>
     </mat-grid-tile>
@@ -62,15 +55,7 @@
 
         <input matInput
         placeholder="Fee"
-       formControlName="fee">
-
-    </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile>
-    <mat-form-field style="width: 205px;">
-
-        <input matInput placeholder="Description"
-            formControlName="description">
+       formControlName="fees">
 
     </mat-form-field>
     </mat-grid-tile>

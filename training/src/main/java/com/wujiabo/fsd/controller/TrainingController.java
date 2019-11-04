@@ -46,4 +46,10 @@ public class TrainingController {
         String msg = trainingService.bookTraining(id,email);
         return ResponseEntity.ok(msg);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addTraining(@RequestBody TTraining tTraining) {
+        String msg = trainingService.addTraining(tTraining);
+        return ResponseEntity.ok(msg);
+    }
 }

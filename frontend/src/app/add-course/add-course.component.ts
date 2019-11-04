@@ -26,12 +26,10 @@ export class AddCourseComponent implements OnInit {
     private alertService: AlertService) {
       this.username = username;
       this.form = fb.group({
-        name: ['', Validators.required],
-        description: [''],
         startAt: [moment(), Validators.required],
         endAt: [moment(), Validators.required],
-        skill: ['', Validators.required],
-        fee: ['', Validators.required],
+        skillId: ['', Validators.required],
+        fees: ['', Validators.required],
         mentorName: [username]
         });
     }
@@ -42,13 +40,11 @@ export class AddCourseComponent implements OnInit {
   save() {
     if (this.form.valid) {
       const course: NewCourse = {
-        name : this.form.value.name,
-        description : this.form.value.description,
-        skill: this.form.value.skill,
+        skillId: this.form.value.skillId,
         startDate: this.form.value.startAt,
         endDate: this.form.value.endAt,
         mentorName: this.form.value.mentorName,
-        fee: this.form.value.fee
+        fees: this.form.value.fees
       };
       this.submitted = true;
 
@@ -61,10 +57,8 @@ export class AddCourseComponent implements OnInit {
         .subscribe(
             data => {
               // tslint:disable-next-line:no-string-literal
-              if (data['code'] === 200) {
                 // tslint:disable-next-line:no-string-literal
-                this.alertService.success(data['message']);
-              }
+                this.alertService.success(data);
             },
             error => {
                 this.alertService.error(error);

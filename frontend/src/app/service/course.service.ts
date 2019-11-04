@@ -12,12 +12,7 @@ export class CourseService {
   constructor(private http: HttpClient) { }
 
   addCourse(course: NewCourse) {
-    return this.http.post(`${environment.gatewayurl}/course/api/v1/addcourse`, course);
-  }
-
-
-  addRate(rate: NewRate) {
-    return this.http.post(`${environment.gatewayurl}/course/api/v1/addrate`, rate);
+    return this.http.post(`${environment.gatewayurl}/training/api/training/add`, course);
   }
 
   findCourses() {

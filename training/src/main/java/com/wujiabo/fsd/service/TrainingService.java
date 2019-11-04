@@ -14,4 +14,6 @@ public interface TrainingService {
     String bookTraining(String id, String email);
 
     List<TTraining> findMentorTrainings(String status, String email);
+
+    String addTraining(TTraining tTraining);
 }

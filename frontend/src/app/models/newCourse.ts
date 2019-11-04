@@ -1,9 +1,9 @@
 export interface NewCourse {
-  name: string;
-  description: string;
-  skill: string;
+  skillId: string;
+  skillName: string;
   startDate: Date;
   endDate: Date;
+  mentorId: string;
   mentorName: string;
-  fee: number;
+  fees: number;
 }

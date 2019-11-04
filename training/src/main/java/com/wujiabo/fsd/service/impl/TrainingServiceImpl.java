@@ -1,10 +1,12 @@
 package com.wujiabo.fsd.service.impl;
 
+import com.wujiabo.fsd.dto.TTechnology;
 import com.wujiabo.fsd.dto.TUser;
 import com.wujiabo.fsd.entity.TTraining;
 import com.wujiabo.fsd.entity.TTrainingCriteria;
 import com.wujiabo.fsd.entity.TUserTraining;
 import com.wujiabo.fsd.entity.TUserTrainingCriteria;
+import com.wujiabo.fsd.feign.TechnologyFeign;
 import com.wujiabo.fsd.feign.UserFeign;
 import com.wujiabo.fsd.mapper.TTrainingMapper;
 import com.wujiabo.fsd.mapper.TUserTrainingMapper;
@@ -29,6 +31,8 @@ public class TrainingServiceImpl implements TrainingService {
     private TUserTrainingMapper tUserTrainingMapper;
     @Autowired
     private UserFeign userFeign;
+    @Autowired
+    private TechnologyFeign technologyFeign;
     @Override
     public List<TTraining> findAllTrainings() {
         TTrainingCriteria example = new TTrainingCriteria();
@@ -88,5 +92,24 @@ public class TrainingServiceImpl implements TrainingService {
         example.createCriteria().andMentorNameEqualTo(email).andStatusEqualTo(status);
         List<TTraining> tTrainings = tTrainingMapper.selectByExample(example);
         return tTrainings;
+    }
+
+    @Override
+    @Transactional
+    public String addTraining(TTraining tTraining) {
+
+        ResponseEntity<TUser> responseEntity = userFeign.findByEmail(tTraining.getMentorName());
+        TUser tUser = responseEntity.getBody();
+
+        ResponseEntity<TTechnology> technologyResponseEntity = technologyFeign.findBySkillName(tTraining.getSkillName());
+        TTechnology technology = technologyResponseEntity.getBody();
+
+        tTraining.setId(UUID.randomUUID().toString());
+        tTraining.setStatus("going");
+        tTraining.setProgress(0);
+        tTraining.setMentorId(tUser.getId());
+        tTraining.setSkillName(technology.getSkillName());
+        tTrainingMapper.insertSelective(tTraining);
+        return "save success";
     }
 }
