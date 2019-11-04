@@ -28,4 +28,11 @@ public class TrainingController {
         List<TTraining> trainings = trainingService.findEnableTrainings();
         return ResponseEntity.ok(trainings);
     }
+
+    @GetMapping("/my/list/${status}/${email}")
+    public ResponseEntity<List<TTraining>> findMyTrainings(@PathVariable("status") String status
+            ,@PathVariable("email") String email) {
+        List<TTraining> trainings = trainingService.findMyTrainings(status,email);
+        return ResponseEntity.ok(trainings);
+    }
 }

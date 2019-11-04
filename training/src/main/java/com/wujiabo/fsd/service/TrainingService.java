@@ -8,4 +8,6 @@ public interface TrainingService {
     List<TTraining> findAllTrainings();
 
     List<TTraining> findEnableTrainings();
+
+    List<TTraining> findMyTrainings(String status, String email);
 }

@@ -33,8 +33,12 @@ export class CourseService {
     return this.http.get(`${environment.gatewayurl}/course/api/v1/mentor/book?id=${id}&username=${username}&mentorname=${mentorname}`);
   }
 
-  findUserCourses(progress: number, username: string) {
-    return this.http.get(`${environment.gatewayurl}/course/api/v1/user/list?progress=${progress}&username=${username}`);
+  findUserCourses(tabIndex: number, username: string) {
+    if(tabIndex == 2){
+        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/completed/${username}`);
+    }else{
+        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/going/${username}`);
+    }
   }
 
 }
