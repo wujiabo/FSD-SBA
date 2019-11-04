@@ -1,0 +1,25 @@
+package com.wujiabo.fsd.controller;
+
+import com.wujiabo.fsd.entity.TTechnology;
+import com.wujiabo.fsd.service.TechnologyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/technology")
+public class TechnologyController {
+    @Autowired
+    private TechnologyService technologyService;
+
+    @GetMapping("/list")
+    public ResponseEntity<List<TTechnology>> list(){
+        List<TTechnology> technologies = technologyService.findAllTechnologies();
+        return ResponseEntity.ok(technologies);
+    }
+}
