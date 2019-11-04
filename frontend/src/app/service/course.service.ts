@@ -29,7 +29,7 @@ export class CourseService {
   }
 
   bookCourses(id: number, username: string, mentorname: string) {
-    return this.http.post(`${environment.gatewayurl}/training/api/training/book/${id}/${username}`);
+    return this.http.post(`${environment.gatewayurl}/training/api/training/book/${id}/${username}`,{});
   }
 
   findUserCourses(tabIndex: number, username: string) {
