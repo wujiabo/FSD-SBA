@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(value = "sba-technology", fallback = TechnologyFeignFallback.class)
 public interface TechnologyFeign {
 
-    @RequestMapping(value = "/api/technology/find/{skillName}", method = RequestMethod.GET)
-    ResponseEntity<TTechnology> findBySkillName(@PathVariable("skillName") String skillName);
+    @RequestMapping(value = "/api/technology/find/{skillId}", method = RequestMethod.GET)
+    ResponseEntity<TTechnology> findBySkillId(@PathVariable("skillId") String skillId);
 }

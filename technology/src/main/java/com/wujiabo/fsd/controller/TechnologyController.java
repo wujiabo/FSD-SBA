@@ -24,9 +24,9 @@ public class TechnologyController {
         return ResponseEntity.ok(technologies);
     }
 
-    @GetMapping("/find/{skillName}")
-    public ResponseEntity<TTechnology> find(@PathVariable("skillName") String skillName){
-        TTechnology technology = technologyService.findBySkillName(skillName);
+    @GetMapping("/find/{skillId}")
+    public ResponseEntity<TTechnology> find(@PathVariable("skillId") String skillId){
+        TTechnology technology = technologyService.findBySkillId(skillId);
         return ResponseEntity.ok(technology);
     }
 }

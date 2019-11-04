@@ -101,7 +101,7 @@ public class TrainingServiceImpl implements TrainingService {
         ResponseEntity<TUser> responseEntity = userFeign.findByEmail(tTraining.getMentorName());
         TUser tUser = responseEntity.getBody();
 
-        ResponseEntity<TTechnology> technologyResponseEntity = technologyFeign.findBySkillName(tTraining.getSkillName());
+        ResponseEntity<TTechnology> technologyResponseEntity = technologyFeign.findBySkillId(tTraining.getSkillId());
         TTechnology technology = technologyResponseEntity.getBody();
 
         tTraining.setId(UUID.randomUUID().toString());

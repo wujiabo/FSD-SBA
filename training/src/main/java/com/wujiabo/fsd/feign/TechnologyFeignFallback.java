@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TechnologyFeignFallback implements TechnologyFeign {
     @Override
-    public ResponseEntity<TTechnology> findBySkillName(String skillName) {
+    public ResponseEntity<TTechnology> findBySkillId(String skillId) {
         return null;
     }
 }

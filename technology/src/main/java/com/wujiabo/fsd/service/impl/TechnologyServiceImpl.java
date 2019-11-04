@@ -23,9 +23,9 @@ public class TechnologyServiceImpl implements TechnologyService {
     }
 
     @Override
-    public TTechnology findBySkillName(String skillName) {
+    public TTechnology findBySkillId(String skillId) {
         TTechnologyCriteria example = new TTechnologyCriteria();
-        example.createCriteria().andSkillNameEqualTo(skillName);
+        example.createCriteria().andIdEqualTo(skillId);
         List<TTechnology> tTechnologies = tTechnologyMapper.selectByExample(example);
         if(CollectionUtils.isEmpty(tTechnologies)){
             return null;

@@ -7,5 +7,5 @@ import java.util.List;
 public interface TechnologyService {
     List<TTechnology> findAllTechnologies();
 
-    TTechnology findBySkillName(String skillName);
+    TTechnology findBySkillId(String skillId);
 }
