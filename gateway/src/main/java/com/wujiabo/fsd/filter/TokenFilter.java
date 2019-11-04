@@ -38,7 +38,9 @@ public class TokenFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         String uri = request.getRequestURL().toString();
-        if(uri.contains("/api/auth/register") || uri.contains("/api/auth/login")){
+        if(uri.contains("/api/auth/register")
+            || uri.contains("/api/auth/login")
+            || uri.contains("/api/search")){
             return false;
         }
         return true; // 是否执行该过滤器，此处为true，说明需要过滤
