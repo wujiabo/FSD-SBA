@@ -25,7 +25,7 @@ export class CourseService {
   }
 
   searchCourses() {
-    return this.http.get(`${environment.gatewayurl}/course/api/v1/mentor/searchcourse`);
+    return this.http.get(`${environment.gatewayurl}/training/api/training/my/list`);
   }
 
 

@@ -30,6 +30,7 @@ export class UserListComponent implements OnInit {
     this.showCourse = true;
     this.courseservice.searchCourses().subscribe(courses => {
       // tslint:disable-next-line:no-string-literal
+      debugger
       if (courses['code'] === 200) {
         // tslint:disable-next-line:no-string-literal
         this.courses = courses['data'];

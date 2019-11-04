@@ -38,6 +38,9 @@ public class TokenFilter extends ZuulFilter {
     public boolean shouldFilter() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
+        if (StringUtils.equals("OPTIONS",request.getMethod())){
+            return false;
+        }
         String uri = request.getRequestURL().toString();
         if(uri.contains("/api/auth/register")
             || uri.contains("/api/auth/login")
