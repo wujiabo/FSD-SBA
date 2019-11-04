@@ -14,7 +14,7 @@ export class UserService {
   }
 
   findUser(username: string) {
-    return this.http.get(`${environment.gatewayurl}/account/api/v1/query?username=${username}`);
+    return this.http.get(`${environment.gatewayurl}/user/api/user/findByEmail/${username}`);
   }
 
 }
