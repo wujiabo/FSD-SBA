@@ -23,9 +23,9 @@ public class TrainingController {
         return ResponseEntity.ok(trainings);
     }
 
-    @GetMapping("/my/list")
-    public ResponseEntity<List<TTraining>> findMyTrainings() {
-        List<TTraining> trainings = trainingService.findMyTrainings("");
+    @GetMapping("/enable/list")
+    public ResponseEntity<List<TTraining>> findEnableTrainings() {
+        List<TTraining> trainings = trainingService.findEnableTrainings();
         return ResponseEntity.ok(trainings);
     }
 }

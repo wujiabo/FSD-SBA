@@ -7,5 +7,5 @@ import java.util.List;
 public interface TrainingService {
     List<TTraining> findAllTrainings();
 
-    List<TTraining> findMyTrainings(String userId);
+    List<TTraining> findEnableTrainings();
 }

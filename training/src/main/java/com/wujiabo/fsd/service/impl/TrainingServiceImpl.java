@@ -20,8 +20,9 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public List<TTraining> findMyTrainings(String userId) {
+    public List<TTraining> findEnableTrainings() {
         TTrainingCriteria example = new TTrainingCriteria();
+        example.createCriteria().andStatusNotEqualTo("completed");
         return tTrainingMapper.selectByExample(example);
     }
 }
