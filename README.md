@@ -61,6 +61,11 @@ Mentor On Demand (FSD SBA) v3.0
     Run mvn clean test to execute the backend test
 
 6. Jmeter’s JMX file to test atleast one REST End point, and Screenshot of report
+    
+    sba-jmeter.jmx
+    
+    sba-jmeter.jpg
+    
 7. Dockerfile
 
     FSD-SBA/registry/Dockerfile

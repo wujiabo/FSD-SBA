@@ -49,7 +49,7 @@ export class UserListComponent implements OnInit {
     this.loading = true;
     this.username = JSON.parse(localStorage.getItem('currentUser')).username;
     this.courseservice.bookCourses(id, this.username, mentor).subscribe(data => {
-        this.alertService.success(data);
+        this.alertService.success(data.toString());
         this.loading = false;
         this.searchCourses();
     },
