@@ -43,13 +43,9 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public List<TTraining> findMyTrainings(String type,String status, String email) {
+    public List<TTraining> findUserTrainings(String status, String email) {
         TUserTrainingCriteria userExample = new TUserTrainingCriteria();
-        if(StringUtils.equals("user",type)){
-            userExample.createCriteria().andUserNameEqualTo(email).andStatusEqualTo(status);
-        }else{
-            userExample.createCriteria().andMentorNameEqualTo(email).andStatusEqualTo(status);
-        }
+        userExample.createCriteria().andUserNameEqualTo(email).andStatusEqualTo(status);
         List<TUserTraining> tUserTrainings = tUserTrainingMapper.selectByExample(userExample);
         List<String> trainingIds = tUserTrainings.stream().map(tUserTraining -> tUserTraining.getTrainingId()).collect(Collectors.toList());
         if(CollectionUtils.isEmpty(trainingIds)){
@@ -84,5 +80,13 @@ public class TrainingServiceImpl implements TrainingService {
         tUserTraining.setUserName(tUser.getEmail());
         tUserTrainingMapper.insertSelective(tUserTraining);
         return "booked success";
+    }
+
+    @Override
+    public List<TTraining> findMentorTrainings(String status, String email) {
+        TTrainingCriteria example = new TTrainingCriteria();
+        example.createCriteria().andMentorNameEqualTo(email).andStatusEqualTo(status);
+        List<TTraining> tTrainings = tTrainingMapper.selectByExample(example);
+        return tTrainings;
     }
 }

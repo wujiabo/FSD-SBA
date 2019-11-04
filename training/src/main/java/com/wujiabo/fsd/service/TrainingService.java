@@ -9,7 +9,9 @@ public interface TrainingService {
 
     List<TTraining> findEnableTrainings();
 
-    List<TTraining> findMyTrainings(String type,String status, String email);
+    List<TTraining> findUserTrainings(String status, String email);
 
     String bookTraining(String id, String email);
+
+    List<TTraining> findMentorTrainings(String status, String email);
 }

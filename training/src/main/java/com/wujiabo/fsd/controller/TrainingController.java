@@ -2,10 +2,12 @@ package com.wujiabo.fsd.controller;
 
 import com.wujiabo.fsd.entity.TTraining;
 import com.wujiabo.fsd.service.TrainingService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,7 +31,12 @@ public class TrainingController {
     @GetMapping("/my/list/{type}/{status}/{email}")
     public ResponseEntity<List<TTraining>> findMyTrainings(@PathVariable("type") String type,
             @PathVariable("status") String status, @PathVariable("email") String email) {
-        List<TTraining> trainings = trainingService.findMyTrainings(type,status,email);
+        List<TTraining> trainings = new ArrayList<>();
+        if(StringUtils.equals("user",type)){
+            trainings = trainingService.findUserTrainings(status,email);
+        }else{
+            trainings = trainingService.findMentorTrainings(status,email);
+        }
         return ResponseEntity.ok(trainings);
     }
 
