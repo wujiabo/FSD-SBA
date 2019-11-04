@@ -11,7 +11,7 @@ import { AlertService } from '../service/alert.service';
 export class UserListComponent implements OnInit {
 
   loading = false;
-  courses: Course[];
+  courses: any;
   showCourse: boolean;
   showInProgressCourse: boolean;
   @Input() userRole: string;

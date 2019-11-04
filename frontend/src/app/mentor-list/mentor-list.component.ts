@@ -10,7 +10,7 @@ import { Course } from '../models/course';
 })
 export class MentorListComponent implements OnInit {
 
-  courses: Course[];
+  courses: any;
   showCourse: boolean;
   @Input() userRole: string;
   @Input() searchText: string;
