@@ -49,13 +49,9 @@ export class UserListComponent implements OnInit {
     this.loading = true;
     this.username = JSON.parse(localStorage.getItem('currentUser')).username;
     this.courseservice.bookCourses(id, this.username, mentor).subscribe(data => {
-      // tslint:disable-next-line:no-string-literal
-      if (data['code'] === 200) {
-        // tslint:disable-next-line:no-string-literal
-        this.alertService.success(data['message']);
+        this.alertService.success(data);
         this.loading = false;
         this.searchCourses();
-      }
     },
     error => {
       this.alertService.error(error);

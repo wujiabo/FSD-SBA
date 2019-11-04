@@ -4,10 +4,7 @@ import com.wujiabo.fsd.entity.TTraining;
 import com.wujiabo.fsd.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +31,12 @@ public class TrainingController {
             ,@PathVariable("email") String email) {
         List<TTraining> trainings = trainingService.findMyTrainings(status,email);
         return ResponseEntity.ok(trainings);
+    }
+
+    @PostMapping("/book/{id}/{email}")
+    public ResponseEntity<String> bookTraining(@PathVariable("id") String id
+            ,@PathVariable("email") String email) {
+        String msg = trainingService.bookTraining(id,email);
+        return ResponseEntity.ok(msg);
     }
 }
