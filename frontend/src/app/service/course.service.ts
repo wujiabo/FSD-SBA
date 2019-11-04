@@ -21,7 +21,7 @@ export class CourseService {
   }
 
   findCourses() {
-    return this.http.get(`${environment.gatewayurl}/course/api/v1/mentor/list`);
+    return this.http.get(`${environment.gatewayurl}/search/api/search/course/list`);
   }
 
   searchCourses() {

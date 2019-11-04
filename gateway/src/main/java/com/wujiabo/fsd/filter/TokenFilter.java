@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,8 +62,8 @@ public class TokenFilter extends ZuulFilter {
             return null;
         }
 
-        UserInfoDto userInfoDto = authFeign.checkToken(token);
-        if(StringUtils.isBlank(userInfoDto.getUsername())){
+        ResponseEntity<UserInfoDto> responseEntity = authFeign.checkToken(token);
+        if(StringUtils.isBlank(responseEntity.getBody().getUsername())){
             ctx.setSendZuulResponse(false); //不对其进行路由
             ctx.setResponseStatusCode(HttpStatus.BAD_REQUEST.value());
             ctx.setResponseBody("checkToken error");

@@ -2,6 +2,7 @@ package com.wujiabo.fsd.feign;
 
 import com.wujiabo.fsd.dto.UserInfoDto;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AuthFeign {
 
     @RequestMapping(value = "/api/auth/checkToken", method = RequestMethod.POST)
-    UserInfoDto checkToken(@RequestParam("token") String token);
+    ResponseEntity<UserInfoDto> checkToken(@RequestParam("token") String token);
 }
