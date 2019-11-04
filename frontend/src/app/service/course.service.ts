@@ -34,9 +34,9 @@ export class CourseService {
 
   findUserCourses(tabIndex: number, username: string) {
     if(tabIndex == 2){
-        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/completed/${username}`);
+        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/user/completed/${username}`);
     }else{
-        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/going/${username}`);
+        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/user/going/${username}`);
     }
   }
 

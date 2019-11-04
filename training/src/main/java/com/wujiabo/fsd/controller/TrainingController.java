@@ -26,10 +26,10 @@ public class TrainingController {
         return ResponseEntity.ok(trainings);
     }
 
-    @GetMapping("/my/list/{status}/{email}")
-    public ResponseEntity<List<TTraining>> findMyTrainings(@PathVariable("status") String status
-            ,@PathVariable("email") String email) {
-        List<TTraining> trainings = trainingService.findMyTrainings(status,email);
+    @GetMapping("/my/list/{type}/{status}/{email}")
+    public ResponseEntity<List<TTraining>> findMyTrainings(@PathVariable("type") String type,
+            @PathVariable("status") String status, @PathVariable("email") String email) {
+        List<TTraining> trainings = trainingService.findMyTrainings(type,status,email);
         return ResponseEntity.ok(trainings);
     }
 

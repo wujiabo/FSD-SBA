@@ -9,6 +9,7 @@ import com.wujiabo.fsd.feign.UserFeign;
 import com.wujiabo.fsd.mapper.TTrainingMapper;
 import com.wujiabo.fsd.mapper.TUserTrainingMapper;
 import com.wujiabo.fsd.service.TrainingService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,9 +43,13 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public List<TTraining> findMyTrainings(String status, String email) {
+    public List<TTraining> findMyTrainings(String type,String status, String email) {
         TUserTrainingCriteria userExample = new TUserTrainingCriteria();
-        userExample.createCriteria().andUserNameEqualTo(email).andStatusEqualTo(status);
+        if(StringUtils.equals("user",type)){
+            userExample.createCriteria().andUserNameEqualTo(email).andStatusEqualTo(status);
+        }else{
+            userExample.createCriteria().andMentorNameEqualTo(email).andStatusEqualTo(status);
+        }
         List<TUserTraining> tUserTrainings = tUserTrainingMapper.selectByExample(userExample);
         List<String> trainingIds = tUserTrainings.stream().map(tUserTraining -> tUserTraining.getTrainingId()).collect(Collectors.toList());
         if(CollectionUtils.isEmpty(trainingIds)){
