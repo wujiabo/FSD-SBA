@@ -29,7 +29,7 @@ export class CourseListComponent implements OnInit {
   searchCourses() {
     this.showInProgressCourse = true;
     this.username = JSON.parse(localStorage.getItem('currentUser')).username;
-    this.courseservice.findUserCourses(1, this.username).subscribe(courses => {
+    this.courseservice.findMentorCourses(1, this.username).subscribe(courses => {
       // tslint:disable-next-line:no-string-literal
         this.courses = courses;
         this.showInProgressCourse = false;
@@ -48,7 +48,7 @@ export class CourseListComponent implements OnInit {
       this.searchCourses();
     } else {
       this.showInProgressCourse = true;
-      this.courseservice.findUserCourses(2, this.username).subscribe(data => {
+      this.courseservice.findMentorCourses(2, this.username).subscribe(data => {
         this.showInProgressCourse = false;
         this.courses = data;
     },

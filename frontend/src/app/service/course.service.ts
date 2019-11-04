@@ -35,4 +35,11 @@ export class CourseService {
     }
   }
 
+  findMentorCourses(tabIndex: number, username: string) {
+    if(tabIndex == 2){
+        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/mentor/completed/${username}`);
+    }else{
+        return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/mentor/going/${username}`);
+    }
+  }
 }
