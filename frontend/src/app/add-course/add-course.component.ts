@@ -41,8 +41,10 @@ export class AddCourseComponent implements OnInit {
     if (this.form.valid) {
       const course: NewCourse = {
         skillId: this.form.value.skillId,
+        skillName: '',
         startDate: this.form.value.startAt,
         endDate: this.form.value.endAt,
+        mentorId: '',
         mentorName: this.form.value.mentorName,
         fees: this.form.value.fees
       };
@@ -58,7 +60,7 @@ export class AddCourseComponent implements OnInit {
             data => {
               // tslint:disable-next-line:no-string-literal
                 // tslint:disable-next-line:no-string-literal
-                this.alertService.success(data);
+                this.alertService.success(data.toString());
             },
             error => {
                 this.alertService.error(error);
