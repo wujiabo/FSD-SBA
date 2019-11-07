@@ -112,4 +112,14 @@ public class TrainingServiceImpl implements TrainingService {
         tTrainingMapper.insertSelective(tTraining);
         return "save success";
     }
+
+    @Override
+    @Transactional
+    public String deactivateTraining(String id) {
+        TTraining tTraining = new TTraining();
+        tTraining.setId(id);
+        tTraining.setStatus("deactivate");
+        tTrainingMapper.updateByPrimaryKeySelective(tTraining);
+        return "deactivate success";
+    }
 }

@@ -52,4 +52,10 @@ public class TrainingController {
         String msg = trainingService.addTraining(tTraining);
         return ResponseEntity.ok(msg);
     }
+
+    @PostMapping("/deactivate/{id}")
+    public ResponseEntity<String> deactivateTraining(@PathVariable("id") String id) {
+        String msg = trainingService.deactivateTraining(id);
+        return ResponseEntity.ok(msg);
+    }
 }

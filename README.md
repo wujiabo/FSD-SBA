@@ -54,6 +54,10 @@ Mentor On Demand (FSD SBA) v3.0
     
     docker run -d --name=sba-user --link sba-registry -p 8006:8006 registry.cn-hangzhou.aliyuncs.com/wujiabo/user:latest
 
+    Docker1.jpg
+    
+    Docker2.jpg
+
 5. Test code of Angular and Mid Tier need to be included
 
     Run ng test to execute the frontend test
