@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: sba-mysql
+  namespace: sba
+  labels:
+    name: sba-mysql
+spec:
+  externalIPs:
+    - 10.0.10.135
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    name: sba-mysql

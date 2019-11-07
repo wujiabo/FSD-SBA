@@ -27,3 +27,10 @@ kubectl get services --namespace=sba
 
 
 kubectl expose deploy sba-registry --type="LoadBalancer" --namespace=sba
+
+
+kubectl apply -f k8s-mysql-rc.yaml
+kubectl apply -f k8s-mysql-svc.yaml
+
+kubectl get svc --namespace=sba
+kubectl get pods --namespace=sba
