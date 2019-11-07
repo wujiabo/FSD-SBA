@@ -44,6 +44,6 @@ export class CourseService {
   }
 
   deactivateCourses(id: number) {
-    return this.http.post(`${environment.gatewayurl}/training/api/training/deactivate/${id}/${username}`,{});
+    return this.http.post(`${environment.gatewayurl}/training/api/training/deactivate/${id}`,{});
   }
 }
