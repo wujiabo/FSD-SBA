@@ -41,6 +41,13 @@ pipeline {
             steps{
                 script {
                     bat 'kubectl apply -f k8s-registry.yaml'
+                    bat 'kubectl apply -f k8s-gateway.yaml'
+                    bat 'kubectl apply -f k8s-payment.yaml'
+                    bat 'kubectl apply -f k8s-search.yaml'
+                    bat 'kubectl apply -f k8s-security.yaml'
+                    bat 'kubectl apply -f k8s-technology.yaml'
+                    bat 'kubectl apply -f k8s-training.yaml'
+                    bat 'kubectl apply -f k8s-user.yaml'
                 }
             }
 		}

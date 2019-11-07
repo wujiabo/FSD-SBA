@@ -18,14 +18,14 @@ pipeline {
         }
         stage('Image Build'){
         	steps{
-        	    bat 'docker build -t wujiabo1985/frontend:latest .'
+        	    bat 'docker build -t registry.cn-hangzhou.aliyuncs.com/wujiabo/frontend:latest .'
         	}
         }
-        stage('Image Push'){
-        	steps{
-        	    bat 'docker push wujiabo1985/frontend:latest'
-        	}
-        }
+//        stage('Image Push'){
+//        	steps{
+//        	    bat 'docker push registry.cn-hangzhou.aliyuncs.com/wujiabo/frontend:latest'
+//        	}
+//        }
 		stage('Deploy Image') {
             steps{
                 script {
@@ -33,10 +33,10 @@ pipeline {
                 }
             }
         }
-		stage('Remove Image') {
-            steps{
-                bat "docker rmi wujiabo1985/frontend"
-            }
-        }
+//		stage('Remove Image') {
+//            steps{
+//                bat "docker rmi registry.cn-hangzhou.aliyuncs.com/wujiabo/frontend"
+//            }
+//        }
    }
 }
