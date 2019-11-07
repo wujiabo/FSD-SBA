@@ -45,10 +45,10 @@ pipeline {
             }
 		}
 
-		stage('Remove Unused docker image') {
-            steps{
-                bat "docker rmi $DOCKER_REPO:latest"
-            }
-        }
+//		stage('Remove Unused docker image') {
+//            steps{
+//                bat "docker rmi $DOCKER_REPO:latest"
+//            }
+//        }
    }
 }
