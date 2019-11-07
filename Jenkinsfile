@@ -15,32 +15,32 @@ pipeline {
         }
         stage('Maven Build'){
         	steps{
-        	    bat 'mvn clean package -DskipTests'
+        	    bat 'mvn clean package dockerfile:build -DskipTests'
         	}
         }
-        stage('Building image') {
-            steps{
-                script {
-                    docker.withRegistry( DOCKER_REG, DOCKER_REG_KEY ) {
-                        dockerImage = docker.build DOCKER_REPO + ":latest"
-                    }
-                }
-            }
-	    }
-	    stage('Push Image') {
-            steps{
-                script {
-                    docker.withRegistry( DOCKER_REG, DOCKER_REG_KEY ) {
-		                dockerImage.push()
-                    }
-		        }
-            }
-		}
+//       stage('Building image') {
+//           steps{
+//               script {
+//                   docker.withRegistry( DOCKER_REG, DOCKER_REG_KEY ) {
+//                       dockerImage = docker.build DOCKER_REPO + ":latest"
+//                   }
+//               }
+//           }
+//	    }
+//	    stage('Push Image') {
+//           steps{
+//               script {
+//                   docker.withRegistry( DOCKER_REG, DOCKER_REG_KEY ) {
+//		                dockerImage.push()
+//                   }
+//		        }
+//           }
+//		}
 
         stage('Deploy Image to K8s') {
             steps{
                 script {
-                    bat 'kubectl apply -f deployment.yaml'
+                    bat 'kubectl apply -f k8s-registry.yaml'
                 }
             }
 		}
