@@ -15,6 +15,11 @@
                                 <mat-card-title><span class="label">Skill: </span>{{course.skillName}}</mat-card-title>
                                 <mat-card-subtitle><span class="label">Course Name: </span>{{ course.skillName }}</mat-card-subtitle>
                                 <span class="mat-header-spacer"></span>
+                                <div *ngIf="userRole === 'mentor'">
+                                    <button [disabled]="loading" mat-icon-button color="primary" (click)="deactivate(course.id)">
+                                        <mat-icon style="font-size: 40px">deactivate</mat-icon>
+                                    </button>
+                                </div>
                             </mat-card-header>
                             <mat-card-content>
                                 <mat-grid-list cols="2" rows="3" rowHeight="30px">

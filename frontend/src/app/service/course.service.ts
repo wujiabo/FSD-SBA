@@ -42,4 +42,8 @@ export class CourseService {
         return this.http.get(`${environment.gatewayurl}/training/api/training/my/list/mentor/going/${username}`);
     }
   }
+
+  deactivateCourses(id: number) {
+    return this.http.post(`${environment.gatewayurl}/training/api/training/deactivate/${id}/${username}`,{});
+  }
 }
