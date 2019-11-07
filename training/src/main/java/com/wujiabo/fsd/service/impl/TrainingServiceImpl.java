@@ -61,6 +61,15 @@ public class TrainingServiceImpl implements TrainingService {
         return tTrainings;
     }
 
+
+    @Override
+    public List<TTraining> findMentorTrainings(String status, String email) {
+        TTrainingCriteria example = new TTrainingCriteria();
+        example.createCriteria().andMentorNameEqualTo(email).andStatusEqualTo(status);
+        List<TTraining> tTrainings = tTrainingMapper.selectByExample(example);
+        return tTrainings;
+    }
+
     @Override
     @Transactional
     public String bookTraining(String id, String email) {
@@ -84,14 +93,6 @@ public class TrainingServiceImpl implements TrainingService {
         tUserTraining.setUserName(tUser.getEmail());
         tUserTrainingMapper.insertSelective(tUserTraining);
         return "booked success";
-    }
-
-    @Override
-    public List<TTraining> findMentorTrainings(String status, String email) {
-        TTrainingCriteria example = new TTrainingCriteria();
-        example.createCriteria().andMentorNameEqualTo(email).andStatusEqualTo(status);
-        List<TTraining> tTrainings = tTrainingMapper.selectByExample(example);
-        return tTrainings;
     }
 
     @Override
