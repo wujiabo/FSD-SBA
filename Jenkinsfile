@@ -1,12 +1,16 @@
 pipeline {
     agent any
     environment {
+	    GIT_URL = "https://github.com/wujiabo/FSD-SBA.git"
+		DOCKER_REPO="registry.cn-hangzhou.aliyuncs.com/wujiabo/sba-registry"
+		DOCKER_REG="https://registry.cn-hangzhou.aliyuncs.com"
+		DOCKER_REG_KEY = "cddee4fd-275d-4a88-9e47-f980681f9d80"
 		dockerImage = ''
     }
     stages {
     	stage('CheckOut Code'){
          	steps{
-            	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/wujiabo/FSD-SBA.git']]])
+            	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: GIT_URL]]])
             }
         }
         stage('Maven Build'){
@@ -14,35 +18,37 @@ pipeline {
         	    bat 'mvn clean package -DskipTests'
         	}
         }
-        stage('Image Build'){
-        	steps{
-        	    bat 'mvn dockerfile:build'
-        	}
+        stage('Building image') {
+            steps{
+                script {
+                    docker.withRegistry( DOCKER_REG, DOCKER_REG_KEY ) {
+                        dockerImage = docker.build DOCKER_REPO + ":latest"
+                    }
+                }
+            }
+	    }
+	    stage('Push Image') {
+            steps{
+                script {
+                    docker.withRegistry( DOCKER_REG, DOCKER_REG_KEY ) {
+		                dockerImage.push()
+                    }
+		        }
+            }
+		}
+
+        stage('Deploy Image to K8s') {
+            steps{
+                script {
+                    bat 'kubectl apply -f deployment.yaml'
+                }
+            }
+		}
+
+		stage('Remove Unused docker image') {
+            steps{
+                bat "docker rmi $DOCKER_REPO:latest"
+            }
         }
-        stage('Image Push'){
-        	steps{
-        	    bat 'docker push wujiabo1985/registry:latest'
-        	    bat 'docker push wujiabo1985/gateway:latest'
-        	    bat 'docker push wujiabo1985/payment:latest'
-        	    bat 'docker push wujiabo1985/search:latest'
-        	    bat 'docker push wujiabo1985/security:latest'
-        	    bat 'docker push wujiabo1985/technology:latest'
-        	    bat 'docker push wujiabo1985/training:latest'
-        	    bat 'docker push wujiabo1985/user:latest'
-        	}
-        }
-        stage('Remove Image'){
-        	steps{
-        	    bat 'docker rmi wujiabo1985/registry'
-        	    bat 'docker rmi wujiabo1985/gateway'
-        	    bat 'docker rmi wujiabo1985/payment'
-        	    bat 'docker rmi wujiabo1985/search'
-        	    bat 'docker rmi wujiabo1985/security'
-        	    bat 'docker rmi wujiabo1985/technology'
-        	    bat 'docker rmi wujiabo1985/training'
-        	    bat 'docker rmi wujiabo1985/user'
-        	    bat 'docker image prune -f'
-        	}
-        }
-    }
+   }
 }
