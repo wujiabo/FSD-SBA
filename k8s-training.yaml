@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sba-training
-          image: registry.cn-hangzhou.aliyuncs.com/wujiabo/sba-training:latest
+          image: registry.cn-hangzhou.aliyuncs.com/wujiabo/training:latest
           imagePullPolicy: Never
           ports:
             - name: http-port

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sba-search
-          image: registry.cn-hangzhou.aliyuncs.com/wujiabo/sba-search:latest
+          image: registry.cn-hangzhou.aliyuncs.com/wujiabo/search:latest
           imagePullPolicy: Never
           ports:
             - name: http-port
