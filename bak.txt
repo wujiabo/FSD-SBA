@@ -22,6 +22,11 @@ kubectl expose deploy sba-user --namespace=sba
 kubectl apply -f k8s-mysql.yaml
 kubectl expose deploy sba-mysql --type="LoadBalancer" --namespace=sba
 
+docker exec -it xxx sh
+
+mysql -uroot -p123456
+
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 
 kubectl get all --namespace=sba
 
