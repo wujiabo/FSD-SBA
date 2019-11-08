@@ -107,19 +107,24 @@ kubectl create namespace sba
 kubectl get ns
 
 kubectl apply -f k8s-registry.yaml
+
 kubectl expose deploy sba-registry --type="LoadBalancer" --namespace=sba
 
 kubectl apply -f k8s-gateway.yaml
+
 kubectl expose deploy sba-gateway --type="LoadBalancer" --namespace=sba
 
 kubectl apply -f k8s-security.yaml
+
 kubectl expose deploy sba-security --namespace=sba
 
 kubectl apply -f k8s-user.yaml
+
 kubectl expose deploy sba-user --namespace=sba
 
 
 kubectl apply -f k8s-mysql.yaml
+
 kubectl expose deploy sba-mysql --type="LoadBalancer" --namespace=sba
 
 docker exec -it xxx sh
