@@ -1,4 +1,31 @@
-mvn package docker:build
+mvn clean package dockerfile:build
+
+docker images
+
+kubectl create namespace sba
+
+kubectl get ns
+
+kubectl apply -f k8s-registry.yaml
+kubectl expose deploy sba-registry --namespace=sba
+
+kubectl apply -f k8s-gateway.yaml
+kubectl expose deploy sba-gateway --type="LoadBalancer" --namespace=sba
+
+kubectl apply -f k8s-security.yaml
+kubectl expose deploy sba-security --namespace=sba
+
+kubectl apply -f k8s-user.yaml
+kubectl expose deploy sba-user --namespace=sba
+
+
+kubectl apply -f k8s-mysql.yaml
+kubectl expose deploy sba-mysql --type="LoadBalancer" --namespace=sba
+
+
+kubectl get all --namespace=sba
+
+
 
 docker image prune -f
 
@@ -29,7 +56,7 @@ kubectl get services --namespace=sba
 kubectl expose deploy sba-registry --type="LoadBalancer" --namespace=sba
 
 
-kubectl apply -f k8s-mysql-rc.yaml
+kubectl apply -f k8s-mysql-deploy.yaml
 kubectl apply -f k8s-mysql-svc.yaml
 
 kubectl get svc --namespace=sba
