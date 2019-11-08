@@ -7,7 +7,7 @@ metadata:
     name: sba-mysql
 spec:
   externalIPs:
-    - 10.0.10.135
+    - 10.0.75.66
   ports:
     - port: 3306
       targetPort: 3306
